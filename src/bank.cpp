@@ -22,6 +22,11 @@ void Bank::handleMessage(const QuitMessage& message)
     quit();
 }
 
+void Bank::render()
+{
+    mRenderer.clear(fea::Color::Red);
+}
+
 void Bank::setup(const std::vector<std::string>& args)
 {
     mWindow.create(fea::VideoMode(800, 600), "Bank");
@@ -39,4 +44,6 @@ void Bank::loop()
     mInputHandler.process();
     mWindow.swapBuffers();
     //mAudioPlayer.update();
+
+    render();
 }

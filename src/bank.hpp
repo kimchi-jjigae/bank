@@ -13,6 +13,7 @@ class Bank : public fea::Application,
         Bank();
         ~Bank();
         void handleMessage(const QuitMessage& message) override;
+        void render();
     protected:
         virtual void setup(const std::vector<std::string>& args) override;
         virtual void destroy() override; 
