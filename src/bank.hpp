@@ -4,6 +4,7 @@
 #include <fea/userinterface.hpp>
 #include "inputhandler.hpp"
 #include "messages.hpp"
+#include "mainstate.hpp"
 
 class Bank : public fea::Application,
     public fea::MessageReceiver<QuitMessage>
@@ -23,4 +24,5 @@ class Bank : public fea::Application,
         fea::InputHandler mFeaInputHandler;
 
         InputHandler mInputHandler;
+        MainState mMainState;
 };

@@ -6,7 +6,8 @@ Bank::Bank() :
     mRenderer(fea::Viewport({800, 600}, {0, 0}, fea::Camera({400.0f, 300.0f}))),
     mWindow(new fea::SDL2WindowBackend()),
     mFeaInputHandler(new fea::SDL2InputBackend()),
-    mInputHandler(mBus, mFeaInputHandler)
+    mInputHandler(mBus, mFeaInputHandler),
+    mMainState(mBus, mRenderer)
 {
     mBus.addSubscriber<QuitMessage>(*this);
 }
