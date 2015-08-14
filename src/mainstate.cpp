@@ -5,3 +5,13 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mRenderer(renderer)
 {
 }
+
+void MainState::update()
+{
+    render();
+}
+
+void MainState::render()
+{
+    mRenderer.clear(fea::Color::Red);
+}
