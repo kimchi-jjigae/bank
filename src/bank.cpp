@@ -3,7 +3,7 @@
 #include <fea/ui/sdl2inputbackend.hpp>
 
 Bank::Bank() :
-    mRenderer(fea::Viewport({800, 600}, {0, 0}, fea::Camera({400.0f, 300.0f}))),
+    mRenderer(fea::Viewport({1024, 768}, {0, 0}, fea::Camera({512.0f, 384.0f}))),
     mWindow(new fea::SDL2WindowBackend()),
     mFeaInputHandler(new fea::SDL2InputBackend()),
     mInputHandler(mBus, mFeaInputHandler),
@@ -29,7 +29,7 @@ void Bank::render()
 
 void Bank::setup(const std::vector<std::string>& args)
 {
-    mWindow.create(fea::VideoMode(800, 600), "Bank");
+    mWindow.create(fea::VideoMode(1024, 768), "Bank");
     mRenderer.setup();
     mWindow.setFramerateLimit(60);
 }
