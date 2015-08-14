@@ -27,10 +27,6 @@ void Bank::setup(const std::vector<std::string>& args)
     mWindow.create(fea::VideoMode(800, 600), "Bank");
     mRenderer.setup();
     mWindow.setFramerateLimit(60);
-//
-//    mStateMachine.addGameState("ingame", std::unique_ptr<InGameState>(new InGameState(mBus, mRenderer)));
-//    mStateMachine.addGameState("menu", std::unique_ptr<MenuState>(new MenuState(mBus, mRenderer)));
-//    mStateMachine.setCurrentState("menu");
 }
 
 void Bank::destroy()
@@ -41,10 +37,6 @@ void Bank::destroy()
 void Bank::loop()
 {
     mInputHandler.process();
-    //mStateMachine.run();
     mWindow.swapBuffers();
     //mAudioPlayer.update();
-
-    //if(mStateMachine.isFinished())
-        //quit();
 }
