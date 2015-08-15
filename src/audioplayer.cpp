@@ -8,6 +8,7 @@ AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
     {
         //sounds
         {"turn_page", "data/audio/TurnPage.ogg"},
+        {"queue_ding", "data/audio/BeepBep.ogg"},
         //music
         {"ambient_bank", "data/music/Ambankient.ogg"}
     })

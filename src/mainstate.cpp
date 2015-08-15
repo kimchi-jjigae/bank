@@ -5,8 +5,10 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
     mRenderer(renderer),
     mInitialized(false),
-    counter(0)
+    mQueueCounter(28),
+    mPlayerQueueNumber(38)
 {
+    subscribe(mBus, *this);
 }
 
 void MainState::update()
@@ -23,10 +25,28 @@ void MainState::update()
         mCurrentActivityState->update();
     }
 
-    counter++;
+    if(rand() % 100 == 0)
+        mBus.send(AdvanceQueueMessage());
+}
 
-    if(counter % 100 == 0)
-        mBus.send(PlaySoundMessage{"turn_page", false});
+void MainState::handleMessage(const AdvanceQueueMessage& message)
+{
+    mQueueCounter++;
+
+    if(mQueueCounter > 99)
+        mQueueCounter = 0;
+
+    mBus.send(PlaySoundMessage{"queue_ding", false});
+}
+
+void MainState::handleMessage(const MissNumberMessage& message)
+{
+    mQueueCounter = mPlayerQueueNumber + 1;
+
+    if(mQueueCounter > 99)
+        mQueueCounter = 0;
+
+    mBus.send(PlaySoundMessage{"queue_ding", false});
 }
 
 void MainState::render()

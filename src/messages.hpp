@@ -22,3 +22,11 @@ struct PlaySoundMessage
     std::string name;
     bool loop;
 };
+
+struct AdvanceQueueMessage
+{
+};
+
+struct MissNumberMessage
+{
+};
