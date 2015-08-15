@@ -12,5 +12,6 @@ void setupGlobals()
         {"crossword", "data/sprites/crossword.png"},
         {"sudoku", "data/sprites/sudoku.png"},
         {"number_texture", "data/sprites/numbers.png"},
+        {"childquestion", "data/sprites/childquestion.png"},
     };
 }

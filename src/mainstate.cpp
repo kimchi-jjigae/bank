@@ -85,7 +85,10 @@ void MainState::handleMessage(const AdvanceQueueMessage& message)
 
 void MainState::handleMessage(const MissNumberMessage& message)
 {
-    mQueueCounter = mPlayerQueueNumber + 1;
+    if(mQueueCounter <= mPlayerQueueNumber)
+        mQueueCounter = mPlayerQueueNumber + 1;
+    else
+        mQueueCounter++;
 
     if(mQueueCounter > 99)
         mQueueCounter = 0;
@@ -105,6 +108,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
         mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
     else if(name == "sudoku")
         mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
+    else if(name == "childquestion")
+        mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
