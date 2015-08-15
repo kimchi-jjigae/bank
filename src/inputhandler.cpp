@@ -26,6 +26,8 @@ void InputHandler::process()
                 mBus.send(StartMinigameMessage{"childquestion"});
             else if(event.key.code == fea::Keyboard:: E)
                 mBus.send(StartMinigameMessage{"heartattack"});
+            else if(event.key.code == fea::Keyboard:: W)
+                mBus.send(StartMinigameMessage{"whiteboard"});
         }
         else if(event.type == fea::Event::CLOSED)
         {

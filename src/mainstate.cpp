@@ -117,6 +117,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
         mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
     else if(name == "heartattack")
         mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
+    else if(name == "whiteboard")
+        mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
