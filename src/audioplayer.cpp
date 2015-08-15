@@ -11,6 +11,7 @@ AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
         {"queue_ding", "data/audio/BeepBep.ogg"},
         {"pen", "data/audio/Pen.ogg"},
         {"sigh", "data/audio/sigh.ogg"},
+        {"punch", "data/audio/Punch.ogg"},
         //music
         {"ambient_bank", "data/music/Ambankient.ogg"}
     })

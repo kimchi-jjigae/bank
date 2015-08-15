@@ -110,6 +110,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
         mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
     else if(name == "childquestion")
         mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
+    else if(name == "heartattack")
+        mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)

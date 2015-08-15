@@ -24,6 +24,8 @@ void InputHandler::process()
                 mBus.send(StartMinigameMessage{"sudoku"});
             else if(event.key.code == fea::Keyboard:: H)
                 mBus.send(StartMinigameMessage{"childquestion"});
+            else if(event.key.code == fea::Keyboard:: E)
+                mBus.send(StartMinigameMessage{"heartattack"});
         }
         else if(event.type == fea::Event::CLOSED)
         {
