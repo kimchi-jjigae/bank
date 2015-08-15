@@ -11,3 +11,8 @@ const fea::AnimatedQuad& Character::getSprite()
 {
     return mSprite;
 }
+
+void Character::setAnimation(const fea::Animation& anim)
+{
+    mSprite.setAnimation(anim);
+}

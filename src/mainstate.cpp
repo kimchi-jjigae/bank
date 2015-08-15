@@ -1,5 +1,6 @@
 #include "mainstate.hpp"
 #include "messages.hpp"
+#include "behaviouralstates/allbstates.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -9,6 +10,7 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mPlayerQueueNumber(38)
 {
     subscribe(mBus, *this);
+    mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus)));
 }
 
 void MainState::update()

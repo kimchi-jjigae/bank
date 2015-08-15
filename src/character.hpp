@@ -8,6 +8,7 @@ class Character
     public:
         Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour);
         const fea::AnimatedQuad& getSprite();
+        void setAnimation(const fea::Animation& anim);
 
     private:
         glm::vec2 mSpritePosition;
