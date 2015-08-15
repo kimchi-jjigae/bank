@@ -1,6 +1,8 @@
 #pragma once
 #include <fea/util.hpp>
 #include <fea/render2d.hpp>
+#include <memory>
+#include "activitystate.hpp"
 
 class MainState
 {
@@ -11,4 +13,6 @@ class MainState
         void render();
         fea::MessageBus& mBus;
         fea::Renderer2D& mRenderer;
+
+        std::unique_ptr<ActivityState> mCurrentActivityState;
 };

@@ -8,7 +8,14 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
 
 void MainState::update()
 {
-    render();
+    if(!mCurrentActivityState)
+    {
+        render();
+    }
+    else
+    {
+        mCurrentActivityState->update();
+    }
 }
 
 void MainState::render()
