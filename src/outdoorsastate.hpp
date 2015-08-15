@@ -16,4 +16,6 @@ class OutdoorsAState : public ActivityState
 
         fea::Texture mBackgroundTexture;
         fea::Quad mBackground;
+        fea::Texture mBackButtonTexture;
+        fea::Quad mBackButton;
 };
