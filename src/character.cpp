@@ -9,9 +9,8 @@ Character::Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<Beha
     mSprite.setSize(spriteSize);
     mSprite.setPosition(mSpritePosition);
     initialBehaviour->setOwner(this);
-    mBehaviouralStates.push(initialBehaviour);
+    mBehaviouralStates.push_back(initialBehaviour);
     mSprite.setAnimation(anim);
-
 }
 
 const fea::AnimatedQuad& Character::getSprite()
@@ -19,9 +18,19 @@ const fea::AnimatedQuad& Character::getSprite()
     return mSprite;
 }
 
-std::queue<std::shared_ptr<BehaviouralState>>& Character::getBehaviouralStates()
+std::deque<std::shared_ptr<BehaviouralState>>& Character::getBehaviouralStates()
 {
     return mBehaviouralStates;
+}
+
+glm::vec2 Character::getPosition()
+{
+    return mSpritePosition;
+}
+
+void Character::setPosition(glm::vec2 pos)
+{
+    mSpritePosition = pos;
 }
 
 void Character::update()
