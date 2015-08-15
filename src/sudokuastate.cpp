@@ -35,3 +35,7 @@ void SudokuAState::handleMouseClick(const glm::uvec2& position)
 {
     mIsFinished = true;
 }
+
+void SudokuAState::handleMouseRelease(const glm::uvec2& position)
+{
+}

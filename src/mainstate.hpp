@@ -12,7 +12,8 @@ class MainState :
                                 MissNumberMessage,
                                 StartMinigameMessage,
                                 MouseMoveMessage,
-                                MouseClickMessage>
+                                MouseClickMessage,
+                                MouseReleaseMessage>
 {
     public:
         MainState(fea::MessageBus& bus, fea::Renderer2D& renderer);
@@ -23,6 +24,7 @@ class MainState :
         void handleMessage(const StartMinigameMessage& message) override;
         void handleMessage(const MouseMoveMessage& message) override;
         void handleMessage(const MouseClickMessage& message) override;
+        void handleMessage(const MouseReleaseMessage& message) override;
     private:
         void render();
         void initialize();

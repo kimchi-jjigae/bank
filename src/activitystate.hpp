@@ -10,6 +10,7 @@ class ActivityState
         virtual void render() = 0;
         virtual void handleMouseMove(const glm::uvec2& position) = 0;
         virtual void handleMouseClick(const glm::uvec2& position) = 0;
+        virtual void handleMouseRelease(const glm::uvec2& position) = 0;
         bool isFinished() const;
     protected:
         fea::MessageBus& mBus;
