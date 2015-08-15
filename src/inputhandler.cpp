@@ -18,6 +18,10 @@ void InputHandler::process()
                 mBus.send(QuitMessage());
             else if(event.key.code == fea::Keyboard:: O)
                 mBus.send(StartMinigameMessage{"outdoors"});
+            else if(event.key.code == fea::Keyboard:: C)
+                mBus.send(StartMinigameMessage{"crossword"});
+            else if(event.key.code == fea::Keyboard:: S)
+                mBus.send(StartMinigameMessage{"sudoku"});
         }
         else if(event.type == fea::Event::CLOSED)
         {

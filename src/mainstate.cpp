@@ -99,9 +99,11 @@ void MainState::handleMessage(const StartMinigameMessage& message)
     auto& name = message.name;
 
     if(name == "outdoors")
-    {
         mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
-    }
+    else if(name == "crossword")
+        mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
+    else if(name == "sudoku")
+        mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
