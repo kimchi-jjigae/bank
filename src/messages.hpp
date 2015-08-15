@@ -41,6 +41,11 @@ struct MouseClickMessage
     glm::uvec2 position;
 };
 
+struct MouseReleaseMessage
+{
+    glm::uvec2 position;
+};
+
 struct MouseMoveMessage
 {
     glm::uvec2 position;

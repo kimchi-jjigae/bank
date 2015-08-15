@@ -147,6 +147,18 @@ void MainState::handleMessage(const MouseClickMessage& message)
     }
 }
 
+void MainState::handleMessage(const MouseReleaseMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleMouseRelease(message.position);
+    }
+    else
+    {
+        //behav deleg?
+    }
+}
+
 void MainState::render()
 {
     mRenderer.clear();

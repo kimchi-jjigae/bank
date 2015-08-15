@@ -35,3 +35,7 @@ void OutdoorsAState::handleMouseClick(const glm::uvec2& position)
 {
     mIsFinished = true;
 }
+
+void OutdoorsAState::handleMouseRelease(const glm::uvec2& position)
+{
+}
