@@ -12,11 +12,14 @@ class CrosswordAState : public ActivityState
         virtual void handleMouseClick(const glm::uvec2& position) override;
         virtual void handleMouseRelease(const glm::uvec2& position) override;
     private:
+        void putDot(const glm::uvec2& position);
         int32_t mCounter;
 
         fea::Texture mBackgroundTexture;
-        fea::Texture mCanvas;
+        static fea::Texture mCanvas;
+        static bool mCanvasInitialized;
         fea::Quad mBackground;
         fea::Quad mCanvasQuad;
         bool mDragging;
+        glm::uvec2 mLastPosition;
 };
