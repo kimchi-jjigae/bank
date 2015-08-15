@@ -7,7 +7,8 @@ Bank::Bank() :
     mWindow(new fea::SDL2WindowBackend()),
     mFeaInputHandler(new fea::SDL2InputBackend()),
     mInputHandler(mBus, mFeaInputHandler),
-    mMainState(mBus, mRenderer)
+    mMainState(mBus, mRenderer),
+    mAudioPlayer(mBus)
 {
     mBus.addSubscriber<QuitMessage>(*this);
 }
@@ -38,7 +39,7 @@ void Bank::loop()
 {
     mInputHandler.process();
     mWindow.swapBuffers();
-    //mAudioPlayer.update();
+    mAudioPlayer.update();
 
     mMainState.update();
 }
