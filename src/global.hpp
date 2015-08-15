@@ -1,9 +1,8 @@
 #pragma once
 #include <string>
 #include <unordered_map>
+#include "texturemaker.hpp"
 
-std::unordered_map<std::string, std::string> gTextures
-{
-    {"bank_bg", "data/sprites/bank.png"},
-    {"player", "data/sprites/gubbe.png"}
-};
+extern std::unordered_map<std::string, std::string> gTextures;
+
+void setupGlobals();

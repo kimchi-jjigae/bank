@@ -30,3 +30,8 @@ struct AdvanceQueueMessage
 struct MissNumberMessage
 {
 };
+
+struct StartMinigameMessage
+{
+    std::string name;   
+};

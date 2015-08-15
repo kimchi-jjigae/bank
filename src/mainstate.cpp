@@ -3,6 +3,7 @@
 #include "behaviouralstates/allbstates.hpp"
 #include "texturemaker.hpp"
 #include "global.hpp"
+#include "minigames.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -38,12 +39,18 @@ void MainState::update()
         {
             iter.update();
         }
+
+        if(mCurrentActivityState->isFinished())
+            mCurrentActivityState = nullptr;
     }
 
     render();
 
-    if(rand() % 100 == 0)
-        mBus.send(AdvanceQueueMessage());
+    if(!mCurrentActivityState)
+    {
+        if(rand() % 100 == 0)
+            mBus.send(AdvanceQueueMessage());
+    }
 }
 
 void MainState::handleMessage(const AdvanceQueueMessage& message)
@@ -66,6 +73,16 @@ void MainState::handleMessage(const MissNumberMessage& message)
     mBus.send(PlaySoundMessage{"queue_ding", false});
 }
 
+void MainState::handleMessage(const StartMinigameMessage& message)
+{
+    auto& name = message.name;
+
+    if(name == "outdoors")
+    {
+        mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
+    }
+}
+
 void MainState::render()
 {
     mRenderer.clear();
@@ -83,6 +100,7 @@ void MainState::render()
     {
         mCurrentActivityState->render();
     }
+
     mRenderer.render();
 }
 
@@ -93,5 +111,5 @@ void MainState::initialize()
     mBus.send(PlayMusicMessage{"ambient_bank", false});
 
     // main player
-    mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture));
+    mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(50.0f, 30.0f)));
 }

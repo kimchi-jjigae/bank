@@ -8,7 +8,8 @@
 
 class MainState : 
     public fea::MessageReceiver<AdvanceQueueMessage,
-                                MissNumberMessage>
+                                MissNumberMessage,
+                                StartMinigameMessage>
 {
     public:
         MainState(fea::MessageBus& bus, fea::Renderer2D& renderer);
@@ -16,6 +17,7 @@ class MainState :
         void update();
         void handleMessage(const AdvanceQueueMessage& message) override;
         void handleMessage(const MissNumberMessage& message) override;
+        void handleMessage(const StartMinigameMessage& message) override;
     private:
         void render();
         void initialize();
