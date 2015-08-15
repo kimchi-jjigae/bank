@@ -4,6 +4,7 @@
 #include "texturemaker.hpp"
 #include "global.hpp"
 #include "minigames.hpp"
+#include "animator.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -12,7 +13,9 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mQueueCounter(28),
     mPlayerQueueNumber(38),
     //rendering
-    mBackground({1024.0f, 768.0f})
+    mBackground({1024.0f, 768.0f}),
+    mFirstNumber({26.0f, 40.0f}),
+    mSecondNumber({26.0f, 40.0f})
 {
     subscribe(mBus, *this);
 }
@@ -25,6 +28,20 @@ void MainState::setupGraphics()
     mBackground.setTexture(mBackgroundTexture);
     
     mPlayerTexture = makeTexture(gTextures.at("player"));
+    mNumberTexture = makeTexture(gTextures.at("number_texture"));
+
+    mFirstNumber.setTexture(mNumberTexture);
+    mSecondNumber.setTexture(mNumberTexture);
+
+    mFirstNumber.setPosition({464.0f, 89.0f});
+    mSecondNumber.setPosition({492.0f, 89.0f});
+
+    Animator animator;
+
+    mFirstNumber.setAnimation(animator.getAnimation("number", "4"));
+    mSecondNumber.setAnimation(animator.getAnimation("number", "5"));
+
+    updateNumbers();
 }
 
 void MainState::update()
@@ -48,7 +65,7 @@ void MainState::update()
 
     if(!mCurrentActivityState)
     {
-        if(rand() % 100 == 0)
+        if(rand() % 20 == 0)
             mBus.send(AdvanceQueueMessage());
     }
 }
@@ -61,6 +78,8 @@ void MainState::handleMessage(const AdvanceQueueMessage& message)
         mQueueCounter = 0;
 
     mBus.send(PlaySoundMessage{"queue_ding", false});
+
+    updateNumbers();
 }
 
 void MainState::handleMessage(const MissNumberMessage& message)
@@ -71,6 +90,8 @@ void MainState::handleMessage(const MissNumberMessage& message)
         mQueueCounter = 0;
 
     mBus.send(PlaySoundMessage{"queue_ding", false});
+
+    updateNumbers();
 }
 
 void MainState::handleMessage(const StartMinigameMessage& message)
@@ -95,6 +116,9 @@ void MainState::render()
         {
             mRenderer.queue(iter.getSprite());
         }
+
+        mRenderer.queue(mFirstNumber);
+        mRenderer.queue(mSecondNumber);
     }
     else
     {
@@ -112,4 +136,18 @@ void MainState::initialize()
 
     // main player
     mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(50.0f, 30.0f)));
+}
+
+void MainState::updateNumbers()
+{
+    std::string current;
+    if(mQueueCounter < 10)
+        current = "0";
+
+    current.append(std::to_string(mQueueCounter));
+
+    Animator animator;
+
+    mFirstNumber.setAnimation(animator.getAnimation("number", std::string(1, current[0])));
+    mSecondNumber.setAnimation(animator.getAnimation("number", std::string(1, current[1])));
 }

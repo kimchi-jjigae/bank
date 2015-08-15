@@ -21,6 +21,7 @@ class MainState :
     private:
         void render();
         void initialize();
+        void updateNumbers();
         fea::MessageBus& mBus;
         fea::Renderer2D& mRenderer;
 
@@ -34,5 +35,8 @@ class MainState :
         //graphics
         fea::Texture mBackgroundTexture;
         fea::Texture mPlayerTexture;
+        fea::Texture mNumberTexture;
         fea::Quad mBackground;
+        fea::AnimatedQuad mFirstNumber;
+        fea::AnimatedQuad mSecondNumber;
 };
