@@ -5,6 +5,7 @@
 #include "inputhandler.hpp"
 #include "messages.hpp"
 #include "mainstate.hpp"
+#include "audioplayer.hpp"
 
 class Bank : public fea::Application,
     public fea::MessageReceiver<QuitMessage>
@@ -25,4 +26,5 @@ class Bank : public fea::Application,
 
         InputHandler mInputHandler;
         MainState mMainState;
+        AudioPlayer mAudioPlayer;
 };

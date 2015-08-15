@@ -1,4 +1,6 @@
 #pragma once
+#include <fea/util.hpp>
+#include <fea/render2d.hpp>
 
 class ActivityState
 {

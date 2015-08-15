@@ -1,5 +1,6 @@
 #pragma once
 #include "glm.hpp"
+#include <string>
 
 struct QuitMessage
 {
@@ -8,4 +9,10 @@ struct QuitMessage
 struct ResizeMessage
 {
     glm::uvec2 size;
+};
+
+struct PlayMusicMessage
+{
+    std::string name;
+    bool loop;
 };
