@@ -12,10 +12,13 @@ WalkingBState::WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float sp
 void WalkingBState::update()
 {
     // work out velocity first
-    
-    glm::vec2 temp;
-    temp = mCharacter->getPosition() + mVelocity;
-    mCharacter->setPosition(temp);
+    glm::vec2 charPos = mCharacter->getPosition();
+    glm::vec2 vel = mPositionDestination - charPos;
+    vel = glm::normalize(vel);
+    mVelocity = vel * mSpeed;
+    glm::vec2 nextPos;
+    nextPos = mCharacter->getPosition() + mVelocity;
+    mCharacter->setPosition(nextPos);
 }
 
 void WalkingBState::onFinish()
