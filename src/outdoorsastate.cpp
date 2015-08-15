@@ -9,6 +9,8 @@ OutdoorsAState::OutdoorsAState(fea::MessageBus& bus, fea::Renderer2D& renderer) 
 {
     mBackgroundTexture = makeTexture(gTextures.at("outside"));
     mBackground.setTexture(mBackgroundTexture);
+
+    mBus.send(PlaySoundMessage{"sigh"});
 }
 
 void OutdoorsAState::update()
