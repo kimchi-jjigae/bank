@@ -131,12 +131,13 @@ void MainState::render()
 
 void MainState::initialize()
 {
+    Animator animator;
     mInitialized = true;
 
     mBus.send(PlayMusicMessage{"ambient_bank", false});
 
     // main player
-    mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(50.0f, 30.0f)));
+    mCharacters.push_back(Character(glm::vec2(600.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(124.0f, 396.0f), animator.getAnimation("player", "idle-front")));
 }
 
 void MainState::updateNumbers()
