@@ -66,12 +66,16 @@ void MainState::render()
     if(!mCurrentActivityState)
     {
         mRenderer.queue(mBackground);
+
+        for(auto iter : mCharacters)
+        {
+            //mRenderer.queue(iter->getSprite());
+        }
     }
     else
     {
         mCurrentActivityState->render();
     }
-
     mRenderer.render();
 }
 
