@@ -21,4 +21,9 @@ void MainState::update()
 void MainState::render()
 {
     mRenderer.clear(fea::Color::Red);
+    for(auto iter : mCharacters)
+    {
+        //mRenderer.queue(iter->getSprite());
+    }
+    mRenderer.render();
 }
