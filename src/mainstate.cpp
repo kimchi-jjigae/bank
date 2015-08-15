@@ -39,8 +39,11 @@ void MainState::update()
 
     render();
 
-    if(rand() % 100 == 0)
-        mBus.send(AdvanceQueueMessage());
+    if(!mCurrentActivityState)
+    {
+        if(rand() % 100 == 0)
+            mBus.send(AdvanceQueueMessage());
+    }
 }
 
 void MainState::handleMessage(const AdvanceQueueMessage& message)
