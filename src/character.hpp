@@ -1,6 +1,7 @@
 #include "behaviouralstate.hpp"
 #include "glm.hpp"
 #include <memory>
+#include <queue>
 #include <fea/render2d.hpp>
 
 class Character
@@ -16,6 +17,6 @@ class Character
         //glm::vec2 mClickablePosition;
         bool mInteractive;
         // id mInteractionActivityStateId;
-        std::shared_ptr<BehaviouralState> mCurrentBehaviouralState;
+        std::queue<std::shared_ptr<BehaviouralState>> mBehaviouralStates;
         fea::AnimatedQuad mSprite;
 };
