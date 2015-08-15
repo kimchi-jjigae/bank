@@ -1,17 +1,17 @@
-#include "outdoorsastate.hpp"
+#include "sudokuastate.hpp"
 #include "global.hpp"
 #include "messages.hpp"
 
-OutdoorsAState::OutdoorsAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
+SudokuAState::SudokuAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
     ActivityState(bus, renderer),
     mCounter(600),
     mBackground({1024.0f, 768.0f})
 {
-    mBackgroundTexture = makeTexture(gTextures.at("outside"));
+    mBackgroundTexture = makeTexture(gTextures.at("sudoku"));
     mBackground.setTexture(mBackgroundTexture);
 }
 
-void OutdoorsAState::update()
+void SudokuAState::update()
 {
     mCounter--;
 
@@ -22,16 +22,16 @@ void OutdoorsAState::update()
     }
 }
 
-void OutdoorsAState::render()
+void SudokuAState::render()
 {
     mRenderer.queue(mBackground);
 }
 
-void OutdoorsAState::handleMouseMove(const glm::uvec2& position)
+void SudokuAState::handleMouseMove(const glm::uvec2& position)
 {
 }
 
-void OutdoorsAState::handleMouseClick(const glm::uvec2& position)
+void SudokuAState::handleMouseClick(const glm::uvec2& position)
 {
     mIsFinished = true;
 }

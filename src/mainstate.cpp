@@ -66,7 +66,7 @@ void MainState::update()
 
     if(!mCurrentActivityState)
     {
-        if(rand() % 20 == 0)
+        if(rand() % 1000 == 0)
             mBus.send(AdvanceQueueMessage());
     }
 }
@@ -100,8 +100,34 @@ void MainState::handleMessage(const StartMinigameMessage& message)
     auto& name = message.name;
 
     if(name == "outdoors")
-    {
         mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
+    else if(name == "crossword")
+        mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
+    else if(name == "sudoku")
+        mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
+}
+
+void MainState::handleMessage(const MouseMoveMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleMouseMove(message.position);
+    }
+    else
+    {
+        //behav deleg?
+    }
+}
+
+void MainState::handleMessage(const MouseClickMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleMouseClick(message.position);
+    }
+    else
+    {
+        //behav deleg?
     }
 }
 

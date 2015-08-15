@@ -1,2 +1,4 @@
 #pragma once
 #include "outdoorsastate.hpp"
+#include "crosswordastate.hpp"
+#include "sudokuastate.hpp"

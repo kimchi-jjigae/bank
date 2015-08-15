@@ -18,6 +18,10 @@ void InputHandler::process()
                 mBus.send(QuitMessage());
             else if(event.key.code == fea::Keyboard:: O)
                 mBus.send(StartMinigameMessage{"outdoors"});
+            else if(event.key.code == fea::Keyboard:: C)
+                mBus.send(StartMinigameMessage{"crossword"});
+            else if(event.key.code == fea::Keyboard:: S)
+                mBus.send(StartMinigameMessage{"sudoku"});
         }
         else if(event.type == fea::Event::CLOSED)
         {
@@ -26,6 +30,14 @@ void InputHandler::process()
         else if(event.type == fea::Event::RESIZED)
         {
             mBus.send(ResizeMessage{{event.size.width, event.size.height}});
+        }
+        else if(event.type == fea::Event::MOUSEBUTTONPRESSED)
+        {
+            mBus.send(MouseClickMessage{{event.mouseButton.x, event.mouseButton.y}});
+        }
+        else if(event.type == fea::Event::MOUSEMOVED)
+        {
+            mBus.send(MouseMoveMessage{{event.mouseMove.x, event.mouseMove.y}});
         }
     }
 }
