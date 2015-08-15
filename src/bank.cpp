@@ -26,6 +26,7 @@ void Bank::handleMessage(const QuitMessage& message)
 void Bank::setup(const std::vector<std::string>& args)
 {
     mWindow.create(fea::VideoMode(1024, 768), "Bank");
+    mMainState.setupGraphics();
     mRenderer.setup();
     mWindow.setFramerateLimit(60);
 }
@@ -38,8 +39,8 @@ void Bank::destroy()
 void Bank::loop()
 {
     mInputHandler.process();
-    mWindow.swapBuffers();
     mAudioPlayer.update();
 
     mMainState.update();
+    mWindow.swapBuffers();
 }

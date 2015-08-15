@@ -1,16 +1,29 @@
 #include "mainstate.hpp"
 #include "messages.hpp"
 #include "behaviouralstates/allbstates.hpp"
+#include "texturemaker.hpp"
+#include "global.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
     mRenderer(renderer),
     mInitialized(false),
     mQueueCounter(28),
-    mPlayerQueueNumber(38)
+    mPlayerQueueNumber(38),
+    //rendering
+    mBackground({1024.0f, 768.0f})
 {
     subscribe(mBus, *this);
-    mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus)));
+}
+
+void MainState::setupGraphics()
+{
+    mRenderer.setup();
+
+    mBackgroundTexture = makeTexture(gTextures.at("bank_bg"));
+    mBackground.setTexture(mBackgroundTexture);
+    
+    mPlayerTexture = makeTexture(gTextures.at("player"));
 }
 
 void MainState::update()
@@ -18,14 +31,12 @@ void MainState::update()
     if(!mInitialized)
         initialize();
 
-    if(!mCurrentActivityState)
-    {
-        render();
-    }
-    else
+    if(mCurrentActivityState)
     {
         mCurrentActivityState->update();
     }
+
+    render();
 
     if(rand() % 100 == 0)
         mBus.send(AdvanceQueueMessage());
@@ -53,16 +64,30 @@ void MainState::handleMessage(const MissNumberMessage& message)
 
 void MainState::render()
 {
-    mRenderer.clear(fea::Color::Red);
-    for(auto iter : mCharacters)
+    mRenderer.clear();
+
+    if(!mCurrentActivityState)
     {
-        //mRenderer.queue(iter->getSprite());
+        mRenderer.queue(mBackground);
+
+        for(auto iter : mCharacters)
+        {
+            //mRenderer.queue(iter->getSprite());
+        }
+    }
+    else
+    {
+        mCurrentActivityState->render();
     }
     mRenderer.render();
 }
 
 void MainState::initialize()
 {
-    mBus.send(PlayMusicMessage{"ambient_bank", false});
     mInitialized = true;
+
+    mBus.send(PlayMusicMessage{"ambient_bank", false});
+
+    // main player
+    mCharacters.push_back(Character(glm::vec2(200.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture));
 }

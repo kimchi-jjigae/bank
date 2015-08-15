@@ -6,7 +6,7 @@
 class Character
 {
     public:
-        Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour);
+        Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture);
         const fea::AnimatedQuad& getSprite();
         void setAnimation(const fea::Animation& anim);
 
