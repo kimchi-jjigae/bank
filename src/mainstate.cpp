@@ -61,6 +61,14 @@ void MainState::update()
         if(mCurrentActivityState->isFinished())
             mCurrentActivityState = nullptr;
     }
+    else
+    {
+        for(auto iter : mCharacters)
+        {
+            iter.update();
+        }
+
+    }
 
     render();
 
