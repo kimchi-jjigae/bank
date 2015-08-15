@@ -17,8 +17,3 @@ void IdleBState::onFinish()
 {
     //
 }
-
-std::string IdleBState::getAnimationType()
-{
-    return mAnimationType;
-}

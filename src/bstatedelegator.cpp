@@ -8,6 +8,6 @@ BehaviouralStateDelegator::BehaviouralStateDelegator(fea::MessageBus& bus, std::
 
 void BehaviouralStateDelegator::playerWalk(glm::vec2 destination)
 {
-    int hej = 0;
-    hej++;
+    std::queue<std::shared_ptr<BehaviouralState>>& behaviours = mCharacters.at(0).getBehaviouralStates();
+    behaviours.empty();
 }
