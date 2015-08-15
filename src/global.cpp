@@ -8,9 +8,9 @@ void setupGlobals()
     {
         {"bank_bg", "data/sprites/bank.png"},
         {"outside", "data/sprites/Outside.png"},
+        {"player", "data/sprites/player.png"},
         {"crossword", "data/sprites/crossword.png"},
         {"sudoku", "data/sprites/sudoku.png"},
-        {"player", "data/sprites/gubbe.png"},
         {"number_texture", "data/sprites/numbers.png"},
     };
 }
