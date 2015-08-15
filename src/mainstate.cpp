@@ -66,7 +66,7 @@ void MainState::update()
 
     if(!mCurrentActivityState)
     {
-        if(rand() % 100 == 0)
+        if(rand() % 1000 == 0)
             mBus.send(AdvanceQueueMessage());
     }
 }
