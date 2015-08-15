@@ -14,7 +14,7 @@ void InputHandler::process()
     {
         if(event.type == fea::Event::KEYPRESSED)
         {
-            if(event.key.code == fea::Keyboard::Q)
+            if(event.key.code == fea::Keyboard::ESCAPE)
                 mBus.send(QuitMessage());
         }
         else if(event.type == fea::Event::CLOSED)
