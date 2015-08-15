@@ -18,4 +18,5 @@ class MainState
         std::unique_ptr<ActivityState> mCurrentActivityState;
 
         bool mInitialized;
+        int counter;
 };

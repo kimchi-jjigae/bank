@@ -3,8 +3,12 @@
 AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
     mBus(bus),
     mMusicHandle(0),
+    mAudioHandle(0),
     mAudioFiles(
     {
+        //sounds
+        {"turn_page", "data/audio/TurnPage.ogg"},
+        //music
         {"ambient_bank", "data/music/Ambankient.ogg"}
     })
 {
@@ -24,4 +28,13 @@ void AudioPlayer::handleMessage(const PlayMusicMessage& message)
     mMusicHandle = mAudioPlayer.play(mFileStream);
 
     mAudioPlayer.setLooping(mMusicHandle, message.loop);
+}
+
+void AudioPlayer::handleMessage(const PlaySoundMessage& message)
+{
+    FEA_ASSERT(mAudioFiles.count(message.name) > 0, "audio file " + message.name + " not found!");
+
+    mAudioPlayer.stop(mAudioHandle);
+    mAudioHandle = mAudioPlayer.play(mBufferCache.audio(mAudioFiles.at(message.name)));
+    mAudioPlayer.setLooping(mAudioHandle, message.loop);
 }

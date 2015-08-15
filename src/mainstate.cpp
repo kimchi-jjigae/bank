@@ -4,7 +4,8 @@
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
     mRenderer(renderer),
-    mInitialized(false)
+    mInitialized(false),
+    counter(0)
 {
 }
 
@@ -21,6 +22,11 @@ void MainState::update()
     {
         mCurrentActivityState->update();
     }
+
+    counter++;
+
+    if(counter % 100 == 0)
+        mBus.send(PlaySoundMessage{"turn_page", false});
 }
 
 void MainState::render()

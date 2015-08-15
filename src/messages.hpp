@@ -16,3 +16,9 @@ struct PlayMusicMessage
     std::string name;
     bool loop;
 };
+
+struct PlaySoundMessage
+{
+    std::string name;
+    bool loop;
+};
