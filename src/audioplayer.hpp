@@ -11,6 +11,9 @@ class AudioPlayer :
         void update();
         void handleMessage(const PlayMusicMessage& message) override;
     private:
-        fea::MessageBus mBus;
+        fea::MessageBus& mBus;
         fea::AudioPlayer mAudioPlayer;
+        fea::AudioFileStream mFileStream;
+        fea::AudioHandle mMusicHandle;
+        std::unordered_map<std::string, std::string> mAudioFiles;
 };

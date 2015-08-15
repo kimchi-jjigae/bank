@@ -12,9 +12,12 @@ class MainState
         void update();
     private:
         void render();
+        void initialize();
         fea::MessageBus& mBus;
         fea::Renderer2D& mRenderer;
 
         std::vector<Character> mCharacters;
         std::unique_ptr<ActivityState> mCurrentActivityState;
+
+        bool mInitialized;
 };

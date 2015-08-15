@@ -1,13 +1,18 @@
 #include "mainstate.hpp"
+#include "messages.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
-    mRenderer(renderer)
+    mRenderer(renderer),
+    mInitialized(false)
 {
 }
 
 void MainState::update()
 {
+    if(!mInitialized)
+        initialize();
+
     if(!mCurrentActivityState)
     {
         render();
@@ -26,4 +31,10 @@ void MainState::render()
         //mRenderer.queue(iter->getSprite());
     }
     mRenderer.render();
+}
+
+void MainState::initialize()
+{
+    mBus.send(PlayMusicMessage{"ambient_bank", true});
+    mInitialized = true;
 }
