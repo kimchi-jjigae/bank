@@ -27,5 +27,13 @@ void InputHandler::process()
         {
             mBus.send(ResizeMessage{{event.size.width, event.size.height}});
         }
+        else if(event.type == fea::Event::MOUSEBUTTONPRESSED)
+        {
+            mBus.send(MouseClickMessage{{event.mouseButton.x, event.mouseButton.y}});
+        }
+        else if(event.type == fea::Event::MOUSEMOVED)
+        {
+            mBus.send(MouseMoveMessage{{event.mouseMove.x, event.mouseMove.y}});
+        }
     }
 }

@@ -104,6 +104,30 @@ void MainState::handleMessage(const StartMinigameMessage& message)
     }
 }
 
+void MainState::handleMessage(const MouseMoveMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleMouseMove(message.position);
+    }
+    else
+    {
+        //behav deleg?
+    }
+}
+
+void MainState::handleMessage(const MouseClickMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleMouseClick(message.position);
+    }
+    else
+    {
+        //behav deleg?
+    }
+}
+
 void MainState::render()
 {
     mRenderer.clear();

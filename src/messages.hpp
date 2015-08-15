@@ -35,3 +35,13 @@ struct StartMinigameMessage
 {
     std::string name;   
 };
+
+struct MouseClickMessage
+{
+    glm::uvec2 position;
+};
+
+struct MouseMoveMessage
+{
+    glm::uvec2 position;
+};
