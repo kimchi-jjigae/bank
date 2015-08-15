@@ -1,14 +1,26 @@
 #include "mainstate.hpp"
 #include "messages.hpp"
+#include "texturemaker.hpp"
+#include "global.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
     mRenderer(renderer),
     mInitialized(false),
     mQueueCounter(28),
-    mPlayerQueueNumber(38)
+    mPlayerQueueNumber(38),
+    //rendering
+    mBackground({1024.0f, 768.0f})
 {
     subscribe(mBus, *this);
+}
+
+void MainState::setupGraphics()
+{
+    mRenderer.setup();
+
+    mBackgroundTexture = makeTexture(gTextures.at("bank_bg"));
+    mBackground.setTexture(mBackgroundTexture);
 }
 
 void MainState::update()
@@ -16,14 +28,12 @@ void MainState::update()
     if(!mInitialized)
         initialize();
 
-    if(!mCurrentActivityState)
-    {
-        render();
-    }
-    else
+    if(mCurrentActivityState)
     {
         mCurrentActivityState->update();
     }
+
+    render();
 
     if(rand() % 100 == 0)
         mBus.send(AdvanceQueueMessage());
@@ -51,7 +61,18 @@ void MainState::handleMessage(const MissNumberMessage& message)
 
 void MainState::render()
 {
-    mRenderer.clear(fea::Color::Red);
+    mRenderer.clear();
+
+    if(!mCurrentActivityState)
+    {
+        mRenderer.queue(mBackground);
+    }
+    else
+    {
+        mCurrentActivityState->render();
+    }
+
+    mRenderer.render();
 }
 
 void MainState::initialize()

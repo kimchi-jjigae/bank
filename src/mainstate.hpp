@@ -11,6 +11,7 @@ class MainState :
 {
     public:
         MainState(fea::MessageBus& bus, fea::Renderer2D& renderer);
+        void setupGraphics();
         void update();
         void handleMessage(const AdvanceQueueMessage& message) override;
         void handleMessage(const MissNumberMessage& message) override;
@@ -25,4 +26,8 @@ class MainState :
         bool mInitialized;
         int32_t mQueueCounter;
         int32_t mPlayerQueueNumber;
+
+        //graphics
+        fea::Texture mBackgroundTexture;
+        fea::Quad mBackground;
 };
