@@ -65,11 +65,11 @@ void SudokuAState::handleMouseMove(const glm::uvec2& position)
                 if(mLastPosition.x < transposed.x)
                     mLastPosition.x++;
                 if(mLastPosition.x > transposed.x)
-                    mLastPosition--;
+                    mLastPosition.x--;
                 if(mLastPosition.y < transposed.y)
                     mLastPosition.y++;
                 if(mLastPosition.y > transposed.y)
-                    mLastPosition--;
+                    mLastPosition.y--;
 
                 putDot(mLastPosition);
             }
@@ -83,18 +83,20 @@ void SudokuAState::handleMouseMove(const glm::uvec2& position)
 
 void SudokuAState::handleMouseClick(const glm::uvec2& position)
 {
-    glm::uvec2 transposed = position - (glm::uvec2)mCanvasQuad.getPosition();
-
-    if(transposed.x < 764 && transposed.y < 684)
-    {
-        mDragging = true;
-        mLastPosition = transposed;
-        mBus.send(PlaySoundMessage{"pen", true});
-    }
-    
     if(intersects(position, mBackButton))
     {
         mIsFinished = true;
+    }
+    else
+    {
+        glm::uvec2 transposed = position - (glm::uvec2)mCanvasQuad.getPosition();
+
+        if(transposed.x < 764 && transposed.y < 684)
+        {
+            mDragging = true;
+            mLastPosition = transposed;
+            mBus.send(PlaySoundMessage{"pen", true});
+        }
     }
 }
 

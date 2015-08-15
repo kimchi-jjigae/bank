@@ -65,11 +65,11 @@ void WhiteboardAState::handleMouseMove(const glm::uvec2& position)
                 if(mLastPosition.x < transposed.x)
                     mLastPosition.x++;
                 if(mLastPosition.x > transposed.x)
-                    mLastPosition--;
+                    mLastPosition.x--;
                 if(mLastPosition.y < transposed.y)
                     mLastPosition.y++;
                 if(mLastPosition.y > transposed.y)
-                    mLastPosition--;
+                    mLastPosition.y--;
 
                 putDot(mLastPosition);
             }
