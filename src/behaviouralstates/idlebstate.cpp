@@ -8,6 +8,13 @@ IdleBState::IdleBState(fea::MessageBus& bus) :
     //mBus.sendMusicMessageThingy("idlemusic");
 }
 
+void IdleBState::switchTo()
+{
+    anim = getAnimation("player", mAnimationType);
+    mCharacter->getSprite.setAnimation(anim);
+    mSwitchedTo = true;
+}
+
 void IdleBState::update()
 {
     // nothing happens, I guess

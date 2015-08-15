@@ -12,6 +12,8 @@ class BehaviouralState
         virtual void onFinish() = 0;
         std::string getAnimationType();
         void setOwner(Character* character);
+        bool mSwitchedTo;
+        virtual void switchTo() = 0;
 
     protected:
         Character* mCharacter;

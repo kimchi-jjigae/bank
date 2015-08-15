@@ -3,6 +3,7 @@
 BehaviouralState::BehaviouralState(fea::MessageBus& bus) :
     mBus(bus)
 {
+    mSwitchedTo = false;
 }
 
 std::string BehaviouralState::getAnimationType()

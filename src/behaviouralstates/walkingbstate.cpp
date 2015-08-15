@@ -9,6 +9,13 @@ WalkingBState::WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float sp
     mAnimationType = "walking-front";
 }
 
+void WalkingBState::switchTo()
+{
+    anim = getAnimation("player", mAnimationType);
+    mCharacter->getSprite.setAnimation(anim);
+    mSwitchedTo = true;
+}
+
 void WalkingBState::update()
 {
     // work out velocity first

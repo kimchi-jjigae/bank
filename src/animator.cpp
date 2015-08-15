@@ -6,7 +6,7 @@ Animator::Animator() :
         {
             "player", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f,    0.0f), glm::vec2(124.0f / 496.0f, 396.0f / 1980.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0.0f,    0.0f), glm::vec2(124.0f / 496.0f, 396.0f / 1980.0f), 4, 8)},
                 {"walking-front", fea::Animation(glm::vec2(0.0f,  778.0f), glm::vec2(124.0f / 496.0f, 396.0f / 1980.0f), 4, 8)},
                 {"walking-left",  fea::Animation(glm::vec2(0.0f, 1167.0f), glm::vec2(124.0f / 496.0f, 396.0f / 1980.0f), 4, 8)},
                 {"walking-right", fea::Animation(glm::vec2(0.0f, 1556.0f), glm::vec2(124.0f / 496.0f, 396.0f / 1980.0f), 4, 8)},

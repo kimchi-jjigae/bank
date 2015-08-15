@@ -3,6 +3,7 @@
 #include <iostream>
 
 Character::Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, fea::Animation anim) :
+    mCharacterType(characterType),
     mSpritePosition(spritePos),
     mInteractive(interactive)
 {
@@ -39,5 +40,10 @@ void Character::setPosition(glm::vec2 pos)
 void Character::update()
 {
     mSprite.tick();
-    mBehaviouralStates.front()->update();
+    std::shared_ptr<BehaviouralState> state = mBehaviouralStates.front();
+    if(!state->mSwitchedTo)
+    {
+        state->switchTo();
+    }
+    state->update();
 }
