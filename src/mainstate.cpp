@@ -85,7 +85,10 @@ void MainState::handleMessage(const AdvanceQueueMessage& message)
 
 void MainState::handleMessage(const MissNumberMessage& message)
 {
-    mQueueCounter = mPlayerQueueNumber + 1;
+    if(mQueueCounter <= mPlayerQueueNumber)
+        mQueueCounter = mPlayerQueueNumber + 1;
+    else
+        mQueueCounter++;
 
     if(mQueueCounter > 99)
         mQueueCounter = 0;
