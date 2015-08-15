@@ -24,7 +24,7 @@ Animator::Animator() :
                 {"9", fea::Animation(glm::vec2((9.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)}
             }
         }
-    })
+   })
 {
 }
 
