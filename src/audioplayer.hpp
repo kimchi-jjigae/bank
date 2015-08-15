@@ -5,13 +5,14 @@
 #include "buffercache.hpp"
 
 class AudioPlayer :
-    public fea::MessageReceiver<PlayMusicMessage, PlaySoundMessage>
+    public fea::MessageReceiver<PlayMusicMessage, PlaySoundMessage, StopSoundMessage>
 {
     public:
         AudioPlayer(fea::MessageBus& bus);
         void update();
         void handleMessage(const PlayMusicMessage& message) override;
         void handleMessage(const PlaySoundMessage& message) override;
+        void handleMessage(const StopSoundMessage& message) override;
     private:
         fea::MessageBus& mBus;
         fea::AudioPlayer mAudioPlayer;

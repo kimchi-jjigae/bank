@@ -23,6 +23,10 @@ struct PlaySoundMessage
     bool loop;
 };
 
+struct StopSoundMessage
+{
+};
+
 struct AdvanceQueueMessage
 {
 };

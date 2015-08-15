@@ -82,6 +82,7 @@ void CrosswordAState::handleMouseClick(const glm::uvec2& position)
     {
         mDragging = true;
         mLastPosition = transposed;
+        mBus.send(PlaySoundMessage{"pen", true});
     }
     else
     {
@@ -92,6 +93,7 @@ void CrosswordAState::handleMouseClick(const glm::uvec2& position)
 void CrosswordAState::handleMouseRelease(const glm::uvec2& position)
 {
     mDragging = false;
+    mBus.send(StopSoundMessage());
 }
 
 void CrosswordAState::putDot(const glm::uvec2& position)

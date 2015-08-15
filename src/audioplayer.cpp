@@ -9,6 +9,7 @@ AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
         //sounds
         {"turn_page", "data/audio/TurnPage.ogg"},
         {"queue_ding", "data/audio/BeepBep.ogg"},
+        {"pen", "data/audio/Pen.ogg"},
         //music
         {"ambient_bank", "data/music/Ambankient.ogg"}
     })
@@ -38,4 +39,9 @@ void AudioPlayer::handleMessage(const PlaySoundMessage& message)
     mAudioPlayer.stop(mAudioHandle);
     mAudioHandle = mAudioPlayer.play(mBufferCache.audio(mAudioFiles.at(message.name)));
     mAudioPlayer.setLooping(mAudioHandle, message.loop);
+}
+
+void AudioPlayer::handleMessage(const StopSoundMessage& message)
+{
+    mAudioPlayer.stop(mAudioHandle);
 }

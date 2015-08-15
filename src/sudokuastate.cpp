@@ -82,6 +82,7 @@ void SudokuAState::handleMouseClick(const glm::uvec2& position)
     {
         mDragging = true;
         mLastPosition = transposed;
+        mBus.send(PlaySoundMessage{"pen", true});
     }
     else
     {
@@ -92,6 +93,7 @@ void SudokuAState::handleMouseClick(const glm::uvec2& position)
 void SudokuAState::handleMouseRelease(const glm::uvec2& position)
 {
     mDragging = false;
+    mBus.send(StopSoundMessage());
 }
 
 void SudokuAState::putDot(const glm::uvec2& position)
