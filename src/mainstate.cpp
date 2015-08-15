@@ -15,7 +15,8 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     //rendering
     mBackground({1024.0f, 768.0f}),
     mFirstNumber({26.0f, 40.0f}),
-    mSecondNumber({26.0f, 40.0f})
+    mSecondNumber({26.0f, 40.0f}),
+    mBStateDelegator(bus)
 {
     subscribe(mBus, *this);
 }

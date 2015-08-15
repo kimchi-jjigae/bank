@@ -1,3 +1,4 @@
+#pragma once
 #include "../behaviouralstate.hpp"
 
 class IdleBState : public BehaviouralState

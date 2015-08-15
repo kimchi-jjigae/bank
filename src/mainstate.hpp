@@ -4,6 +4,7 @@
 #include <memory>
 #include "activitystate.hpp"
 #include "character.hpp"
+#include "bstatedelegator.hpp"
 #include "messages.hpp"
 
 class MainState : 
@@ -31,6 +32,8 @@ class MainState :
 
         std::vector<Character> mCharacters;
         std::unique_ptr<ActivityState> mCurrentActivityState;
+
+        BehaviouralStateDelegator mBStateDelegator;
 
         bool mInitialized;
         int32_t mQueueCounter;
