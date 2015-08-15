@@ -8,7 +8,9 @@ class ActivityState
         ActivityState(fea::MessageBus& bus, fea::Renderer2D& renderer);
         virtual void update() = 0;
         virtual void render() = 0;
+        bool isFinished() const;
     protected:
         fea::MessageBus& mBus;
         fea::Renderer2D& mRenderer;
+        bool mIsFinished;
 };

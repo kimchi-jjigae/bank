@@ -16,6 +16,8 @@ void InputHandler::process()
         {
             if(event.key.code == fea::Keyboard::ESCAPE)
                 mBus.send(QuitMessage());
+            else if(event.key.code == fea::Keyboard:: O)
+                mBus.send(StartMinigameMessage{"outdoors"});
         }
         else if(event.type == fea::Event::CLOSED)
         {

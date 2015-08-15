@@ -2,6 +2,7 @@
 #include "messages.hpp"
 #include "texturemaker.hpp"
 #include "global.hpp"
+#include "minigames.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -31,6 +32,9 @@ void MainState::update()
     if(mCurrentActivityState)
     {
         mCurrentActivityState->update();
+
+        if(mCurrentActivityState->isFinished())
+            mCurrentActivityState = nullptr;
     }
 
     render();
@@ -59,6 +63,16 @@ void MainState::handleMessage(const MissNumberMessage& message)
     mBus.send(PlaySoundMessage{"queue_ding", false});
 }
 
+void MainState::handleMessage(const StartMinigameMessage& message)
+{
+    auto& name = message.name;
+
+    if(name == "outdoors")
+    {
+        mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
+    }
+}
+
 void MainState::render()
 {
     mRenderer.clear();
@@ -76,6 +90,7 @@ void MainState::render()
     {
         mCurrentActivityState->render();
     }
+
     mRenderer.render();
 }
 
