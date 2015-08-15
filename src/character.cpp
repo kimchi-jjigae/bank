@@ -6,6 +6,9 @@ Character::Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<Beha
     mCurrentBehaviouralState(initialBehaviour)
 {
     mSprite.setTexture(texture);
+    mSprite.setPosition(mSpritePosition);
+    fea::Animation hej = fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8);
+    mSprite.setAnimation(hej);
 }
 
 const fea::AnimatedQuad& Character::getSprite()
@@ -16,4 +19,9 @@ const fea::AnimatedQuad& Character::getSprite()
 void Character::setAnimation(const fea::Animation& anim)
 {
     mSprite.setAnimation(anim);
+}
+
+void Character::update()
+{
+    mSprite.tick();
 }

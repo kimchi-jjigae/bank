@@ -34,6 +34,10 @@ void MainState::update()
     if(mCurrentActivityState)
     {
         mCurrentActivityState->update();
+        for(auto iter : mCharacters)
+        {
+            iter.update();
+        }
     }
 
     render();
@@ -72,7 +76,7 @@ void MainState::render()
 
         for(auto iter : mCharacters)
         {
-            //mRenderer.queue(iter->getSprite());
+            mRenderer.queue(iter.getSprite());
         }
     }
     else
