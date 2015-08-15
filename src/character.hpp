@@ -1,3 +1,4 @@
+#pragma once
 #include "behaviouralstate.hpp"
 #include "glm.hpp"
 #include <memory>
