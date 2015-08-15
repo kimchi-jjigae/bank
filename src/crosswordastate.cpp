@@ -24,6 +24,8 @@ CrosswordAState::CrosswordAState(fea::MessageBus& bus, fea::Renderer2D& renderer
     
     mCanvasQuad.setTexture(mCanvas);
     mCanvasQuad.setPosition({202.0f, 77.0f});
+
+    mBus.send(PlaySoundMessage{"turn_page"});
 }
 
 void CrosswordAState::update()
