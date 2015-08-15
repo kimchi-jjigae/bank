@@ -1,6 +1,7 @@
 #pragma once
 #include "activitystate.hpp"
 #include <fea/render2d.hpp>
+#include "intersector.hpp"
 
 class ChildQuestionAState : public ActivityState
 {
@@ -15,5 +16,11 @@ class ChildQuestionAState : public ActivityState
         int32_t mCounter;
 
         fea::Texture mBackgroundTexture;
+        fea::Texture mBackButtonTexture;
+        fea::Texture mSayButtonTexture;
+        fea::Texture mSadMouthTexture;
         fea::Quad mBackground;
+        fea::Quad mBackButton;
+        fea::Quad mSayButton;
+        fea::Quad mSadMouth;
 };

@@ -13,5 +13,8 @@ void setupGlobals()
         {"sudoku", "data/sprites/sudoku.png"},
         {"number_texture", "data/sprites/numbers.png"},
         {"childquestion", "data/sprites/childquestion.png"},
+        {"back_button", "data/sprites/backButton.png"},
+        {"say_button", "data/sprites/sayButton.png"},
+        {"sad_mouth", "data/sprites/sadmouth.png"},
     };
 }
