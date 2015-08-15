@@ -8,14 +8,14 @@
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
     mRenderer(renderer),
+    mBStateDelegator(bus, mCharacters),
     mInitialized(false),
     mQueueCounter(28),
     mPlayerQueueNumber(38),
     //rendering
     mBackground({1024.0f, 768.0f}),
     mFirstNumber({26.0f, 40.0f}),
-    mSecondNumber({26.0f, 40.0f}),
-    mBStateDelegator(bus, mCharacters)
+    mSecondNumber({26.0f, 40.0f})
 {
     subscribe(mBus, *this);
 }
@@ -78,6 +78,7 @@ void MainState::update()
 
 void MainState::handleMessage(const AdvanceQueueMessage& message)
 {
+    (void)message;
     mQueueCounter++;
 
     if(mQueueCounter > 99)
@@ -90,6 +91,7 @@ void MainState::handleMessage(const AdvanceQueueMessage& message)
 
 void MainState::handleMessage(const MissNumberMessage& message)
 {
+    (void)message;
     if(mQueueCounter <= mPlayerQueueNumber)
         mQueueCounter = mPlayerQueueNumber + 1;
     else

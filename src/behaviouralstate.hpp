@@ -16,9 +16,9 @@ class BehaviouralState
         virtual void switchTo() = 0;
 
     protected:
+        fea::MessageBus& mBus;
         Character* mCharacter;
         glm::vec2 mPositionDestination;
         glm::vec2 mVelocity;
         std::string mAnimationType;
-        fea::MessageBus& mBus;
 };

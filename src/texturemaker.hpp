@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <fea/render2d.hpp>
-#include "lodepng.hpp"
+#include "lodepng/lodepng.hpp"
+#pragma GCC diagnostic ignored "-Wunused-function"
 
 static fea::Texture makeTexture(const std::string& path)
 {

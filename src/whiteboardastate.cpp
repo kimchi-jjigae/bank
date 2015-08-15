@@ -9,10 +9,10 @@ bool WhiteboardAState::mCanvasInitialized = false;
 WhiteboardAState::WhiteboardAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
     ActivityState(bus, renderer),
     mCounter(600),
+    mBackButton({206.0f, 100.0f}),
     mBackground({1024.0f, 768.0f}),
     mCanvasQuad({877.0f, 613.0f}),
-    mDragging(false),
-    mBackButton({206.0f, 100.0f})
+    mDragging(false)
 {
     mBackgroundTexture = makeTexture(gTextures.at("whiteboard"));
     mBackground.setTexture(mBackgroundTexture);
@@ -31,7 +31,7 @@ WhiteboardAState::WhiteboardAState(fea::MessageBus& bus, fea::Renderer2D& render
     mCanvasQuad.setTexture(mCanvas);
     mCanvasQuad.setPosition({68.0f, 70.0f});
 
-    mBus.send(PlaySoundMessage{"turn_page"});
+    mBus.send(PlaySoundMessage{"turn_page", false});
 }
 
 void WhiteboardAState::update()
@@ -102,6 +102,7 @@ void WhiteboardAState::handleMouseClick(const glm::uvec2& position)
 
 void WhiteboardAState::handleMouseRelease(const glm::uvec2& position)
 {
+    (void)position;
     mDragging = false;
     mBus.send(StopSoundMessage());
 }
@@ -110,12 +111,12 @@ void WhiteboardAState::putDot(const glm::uvec2& position)
 {
     int32_t radius = 2;
 
-    for(int32_t x = position.x - radius; x < position.x + radius; x++)
+    for(int32_t x = (int32_t)position.x - radius; x < (int32_t)position.x + radius; x++)
     {
-        for(int32_t y = position.y - radius; y < position.y + radius; y++)
+        for(int32_t y = (int32_t)position.y - radius; y < (int32_t)position.y + radius; y++)
         {
             if(x > 0 && y > 0 && x < 877 && y < 613)
-                mCanvas.setPixel(x, y, fea::Color(241, 50, 0));
+                mCanvas.setPixel((uint32_t)x, (uint32_t)y, fea::Color(241, 50, 0));
         }
     }
 }

@@ -33,7 +33,7 @@ HeartAttackAState::HeartAttackAState(fea::MessageBus& bus, fea::Renderer2D& rend
     mExplosion.setTexture(mExplosionTexture);
     mExplosion.setOrigin({124.0f, 112.0f});
 
-    mBus.send(PlaySoundMessage{"sigh"});
+    mBus.send(PlaySoundMessage{"sigh", false});
 }
 
 void HeartAttackAState::update()
@@ -78,7 +78,7 @@ void HeartAttackAState::handleMouseClick(const glm::uvec2& position)
     else
     {
         mHitting = true;
-        mBus.send(PlaySoundMessage{"punch"});
+        mBus.send(PlaySoundMessage{"punch", false});
 
         mExplosion.setPosition((glm::vec2)position);
         mExplosionCounter = 10;
@@ -89,5 +89,6 @@ void HeartAttackAState::handleMouseClick(const glm::uvec2& position)
 
 void HeartAttackAState::handleMouseRelease(const glm::uvec2& position)
 {
+    (void)position;
     mHitting = false;
 }

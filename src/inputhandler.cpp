@@ -2,8 +2,8 @@
 #include "messages.hpp"
 
 InputHandler::InputHandler(fea::MessageBus& bus, fea::InputHandler& handler)    :
-    mBus(bus),
-    mHandler(handler)
+    mHandler(handler),
+    mBus(bus)
 {
 }
 

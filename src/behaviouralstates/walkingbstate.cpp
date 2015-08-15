@@ -20,12 +20,17 @@ void WalkingBState::switchTo()
 void WalkingBState::update()
 {
     glm::vec2 charPos = mCharacter->getPosition();
+    std::cout << "old posnext: " << charPos << "\n";
     glm::vec2 vel = mPositionDestination - charPos;
     vel = glm::normalize(vel);
     mVelocity = vel * mSpeed;
     glm::vec2 nextPos;
-    nextPos = mCharacter->getPosition() + mVelocity;
+    nextPos = charPos + mVelocity;
     mCharacter->setPosition(nextPos);
+
+    std::cout << "vel: " << mVelocity << "\n";
+    std::cout << "old pos: " << charPos << "\n";
+    std::cout << "pos: " << mCharacter->getPosition() << "\n";
 }
 
 void WalkingBState::onFinish()
