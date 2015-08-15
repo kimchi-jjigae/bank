@@ -1,6 +1,6 @@
 #include "character.hpp"
 
-Character::Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim) :
+Character::Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, fea::Animation anim) :
     mSpritePosition(spritePos),
     mInteractive(interactive)
 {
