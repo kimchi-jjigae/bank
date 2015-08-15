@@ -36,6 +36,6 @@ void MainState::render()
 
 void MainState::initialize()
 {
-    mBus.send(PlayMusicMessage{"ambient_bank", true});
+    mBus.send(PlayMusicMessage{"ambient_bank", false});
     mInitialized = true;
 }
