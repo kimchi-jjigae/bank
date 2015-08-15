@@ -22,6 +22,7 @@ void setupGlobals()
         {"arm_down", "data/sprites/heartattackarmdown.png"},
         {"explosion", "data/sprites/explosion.png"},
         {"whiteboard", "data/sprites/whiteboard.png"},
+        {"painting", "data/sprites/tavla.png"},
     };
 
     gAnimations = 

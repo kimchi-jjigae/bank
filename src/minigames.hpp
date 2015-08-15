@@ -5,3 +5,4 @@
 #include "childquestionastate.hpp"
 #include "heartattackastate.hpp"
 #include "whiteboardastate.hpp"
+#include "paintingastate.hpp"
