@@ -1,6 +1,7 @@
 #include "sudokuastate.hpp"
 #include "global.hpp"
 #include "messages.hpp"
+#include "intersector.hpp"
 
 fea::Texture SudokuAState::mCanvas = fea::Texture();
 bool SudokuAState::mCanvasInitialized = false;
@@ -10,10 +11,15 @@ SudokuAState::SudokuAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
     mCounter(600),
     mBackground({1024.0f, 768.0f}),
     mCanvasQuad({764.0f, 684.0f}),
-    mDragging(false)
+    mDragging(false),
+    mBackButton({206.0f, 100.0f})
 {
     mBackgroundTexture = makeTexture(gTextures.at("sudoku"));
     mBackground.setTexture(mBackgroundTexture);
+
+    mBackButtonTexture = makeTexture(gTextures.at("back_button"));
+    mBackButton.setTexture(mBackButtonTexture);
+    mBackButton.setPosition({35.0f, 640.0f});
 
 
     if(!mCanvasInitialized)
@@ -43,6 +49,7 @@ void SudokuAState::render()
 {
     mRenderer.queue(mBackground);
     mRenderer.queue(mCanvasQuad);
+    mRenderer.queue(mBackButton);
 }
 
 void SudokuAState::handleMouseMove(const glm::uvec2& position)
@@ -84,7 +91,8 @@ void SudokuAState::handleMouseClick(const glm::uvec2& position)
         mLastPosition = transposed;
         mBus.send(PlaySoundMessage{"pen", true});
     }
-    else
+    
+    if(intersects(position, mBackButton))
     {
         mIsFinished = true;
     }

@@ -16,6 +16,8 @@ class CrosswordAState : public ActivityState
         int32_t mCounter;
 
         fea::Texture mBackgroundTexture;
+        fea::Texture mBackButtonTexture;
+        fea::Quad mBackButton;
         static fea::Texture mCanvas;
         static bool mCanvasInitialized;
         fea::Quad mBackground;

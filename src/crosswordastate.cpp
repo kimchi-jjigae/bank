@@ -1,6 +1,7 @@
 #include "crosswordastate.hpp"
 #include "global.hpp"
 #include "messages.hpp"
+#include "intersector.hpp"
 
 fea::Texture CrosswordAState::mCanvas = fea::Texture();
 bool CrosswordAState::mCanvasInitialized = false;
@@ -10,11 +11,15 @@ CrosswordAState::CrosswordAState(fea::MessageBus& bus, fea::Renderer2D& renderer
     mCounter(600),
     mBackground({1024.0f, 768.0f}),
     mCanvasQuad({764.0f, 684.0f}),
-    mDragging(false)
+    mDragging(false),
+    mBackButton({206.0f, 100.0f})
 {
     mBackgroundTexture = makeTexture(gTextures.at("crossword"));
     mBackground.setTexture(mBackgroundTexture);
 
+    mBackButtonTexture = makeTexture(gTextures.at("back_button"));
+    mBackButton.setTexture(mBackButtonTexture);
+    mBackButton.setPosition({35.0f, 640.0f});
 
     if(!mCanvasInitialized)
     {
@@ -43,6 +48,7 @@ void CrosswordAState::render()
 {
     mRenderer.queue(mBackground);
     mRenderer.queue(mCanvasQuad);
+    mRenderer.queue(mBackButton);
 }
 
 void CrosswordAState::handleMouseMove(const glm::uvec2& position)
@@ -84,7 +90,8 @@ void CrosswordAState::handleMouseClick(const glm::uvec2& position)
         mLastPosition = transposed;
         mBus.send(PlaySoundMessage{"pen", true});
     }
-    else
+
+    if(intersects(position, mBackButton))
     {
         mIsFinished = true;
     }
