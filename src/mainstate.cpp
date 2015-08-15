@@ -4,7 +4,6 @@
 #include "texturemaker.hpp"
 #include "global.hpp"
 #include "minigames.hpp"
-#include "animator.hpp"
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -37,10 +36,8 @@ void MainState::setupGraphics()
     mFirstNumber.setPosition({464.0f, 89.0f});
     mSecondNumber.setPosition({492.0f, 89.0f});
 
-    Animator animator;
-
-    mFirstNumber.setAnimation(animator.getAnimation("number", "4"));
-    mSecondNumber.setAnimation(animator.getAnimation("number", "5"));
+    mFirstNumber.setAnimation(getAnimation("number", "4"));
+    mSecondNumber.setAnimation(getAnimation("number", "5"));
 
     updateNumbers();
 }
@@ -118,6 +115,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
         mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
     else if(name == "childquestion")
         mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
+    else if(name == "heartattack")
+        mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
@@ -198,13 +197,12 @@ void MainState::render()
 
 void MainState::initialize()
 {
-    Animator animator;
     mInitialized = true;
 
     mBus.send(PlayMusicMessage{"ambient_bank", false});
 
     // main player
-    mCharacters.push_back(Character(glm::vec2(600.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(124.0f, 396.0f), animator.getAnimation("player", "idle-front")));
+    mCharacters.push_back(Character(glm::vec2(600.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
 }
 
 void MainState::updateNumbers()
@@ -215,8 +213,6 @@ void MainState::updateNumbers()
 
     current.append(std::to_string(mQueueCounter));
 
-    Animator animator;
-
-    mFirstNumber.setAnimation(animator.getAnimation("number", std::string(1, current[0])));
-    mSecondNumber.setAnimation(animator.getAnimation("number", std::string(1, current[1])));
+    mFirstNumber.setAnimation(getAnimation("number", std::string(1, current[0])));
+    mSecondNumber.setAnimation(getAnimation("number", std::string(1, current[1])));
 }
