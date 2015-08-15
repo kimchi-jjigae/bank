@@ -16,7 +16,7 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBackground({1024.0f, 768.0f}),
     mFirstNumber({26.0f, 40.0f}),
     mSecondNumber({26.0f, 40.0f}),
-    mBStateDelegator(bus)
+    mBStateDelegator(bus, mCharacters)
 {
     subscribe(mBus, *this);
 }
@@ -127,7 +127,23 @@ void MainState::handleMessage(const MouseClickMessage& message)
     }
     else
     {
-        //behav deleg?
+        /*
+        std::vector<Character> clickableChars;
+        for(auto iter : mCharacters)
+        {
+        }
+        */
+        // std::vector characters
+        // for every character, check if it's at the click AND interactive
+            // add to characters vector
+        // if characters != empty
+            // sort(std::vector) by z-index
+            // grab the first one, do interactive stuff
+        // else if click spot is out of bounds
+            // do nothing
+        // else
+            // walk to spot
+            mBStateDelegator.playerWalk(message.position);
     }
 }
 
