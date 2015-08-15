@@ -4,12 +4,17 @@
 #include <memory>
 #include "activitystate.hpp"
 #include "character.hpp"
+#include "messages.hpp"
 
-class MainState
+class MainState : 
+    public fea::MessageReceiver<AdvanceQueueMessage,
+                                MissNumberMessage>
 {
     public:
         MainState(fea::MessageBus& bus, fea::Renderer2D& renderer);
         void update();
+        void handleMessage(const AdvanceQueueMessage& message) override;
+        void handleMessage(const MissNumberMessage& message) override;
     private:
         void render();
         void initialize();
@@ -20,4 +25,6 @@ class MainState
         std::unique_ptr<ActivityState> mCurrentActivityState;
 
         bool mInitialized;
+        int32_t mQueueCounter;
+        int32_t mPlayerQueueNumber;
 };
