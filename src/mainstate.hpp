@@ -40,8 +40,6 @@ class MainState :
         BehaviouralStateDelegator mBStateDelegator;
 
         bool mInitialized;
-        int32_t mQueueCounter;
-        int32_t mPlayerQueueNumber;
         int32_t mFramesToNextNumber;
 
         //graphics

@@ -13,8 +13,6 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mRenderer(renderer),
     mBStateDelegator(bus, mCharacters),
     mInitialized(false),
-    mQueueCounter(28),
-    mPlayerQueueNumber(33),
     mFramesToNextNumber(randomWaitTime()),
     //rendering
     mBackgroundBack({1024.0f, 768.0f}),
@@ -122,10 +120,10 @@ void MainState::update()
 void MainState::handleMessage(const AdvanceQueueMessage& message)
 {
     (void)message;
-    mQueueCounter++;
+    gQueueCounter++;
 
-    if(mQueueCounter > 99)
-        mQueueCounter = 0;
+    if(gQueueCounter > 99)
+        gQueueCounter = 0;
 
     mBus.send(PlaySoundMessage{"queue_ding", false});
 
@@ -135,13 +133,13 @@ void MainState::handleMessage(const AdvanceQueueMessage& message)
 void MainState::handleMessage(const MissNumberMessage& message)
 {
     (void)message;
-    if(mQueueCounter <= mPlayerQueueNumber)
-        mQueueCounter = mPlayerQueueNumber + 1;
+    if(gQueueCounter <= gPlayerQueueNumber)
+        gQueueCounter = gPlayerQueueNumber + 1;
     else
-        mQueueCounter++;
+        gQueueCounter++;
 
-    if(mQueueCounter > 99)
-        mQueueCounter = 0;
+    if(gQueueCounter > 99)
+        gQueueCounter = 0;
 
     mBus.send(PlaySoundMessage{"queue_ding", false});
 
@@ -172,6 +170,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
             mCurrentActivityState = std::unique_ptr<MenuAState>(new MenuAState(mBus, mRenderer));
         else if(name == "hangman")
             mCurrentActivityState = std::unique_ptr<HangmanAState>(new HangmanAState(mBus, mRenderer));
+        else if(name == "takenote")
+            mCurrentActivityState = std::unique_ptr<TakeNoteAState>(new TakeNoteAState(mBus, mRenderer));
     }
 }
 
@@ -255,6 +255,8 @@ void MainState::handleMessage(const KeyPressedMessage& message)
             mBus.send(StartMinigameMessage{"painting"});
         else if(message.key == fea::Keyboard:: A)
             mBus.send(StartMinigameMessage{"hangman"});
+        else if(message.key == fea::Keyboard:: T)
+            mBus.send(StartMinigameMessage{"takenote"});
         //behav deleg?
     }
 }
@@ -321,6 +323,8 @@ void MainState::initialize()
 {
     mInitialized = true;
 
+    gQueueCounter = 28;
+
     // main player
     mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
     mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
@@ -339,10 +343,10 @@ void MainState::initialize()
 void MainState::updateNumbers()
 {
     std::string current;
-    if(mQueueCounter < 10)
+    if(gQueueCounter < 10)
         current = "0";
 
-    current.append(std::to_string(mQueueCounter));
+    current.append(std::to_string(gQueueCounter));
 
     mFirstNumber.setAnimation(getAnimation("number", std::string(1, current[0])));
     mSecondNumber.setAnimation(getAnimation("number", std::string(1, current[1])));

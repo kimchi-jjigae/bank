@@ -4,6 +4,8 @@ std::unordered_map<std::string, std::string> gTextures = {};
 std::unordered_map<std::string, std::unordered_map<std::string, fea::Animation>> gAnimations = {};
 bool gPaintingRuined = false;
 bool gMenuOver = false;
+int32_t gPlayerQueueNumber = 0;
+int32_t gQueueCounter = 0;
 
 void setupGlobals()
 {
@@ -45,6 +47,8 @@ void setupGlobals()
         {"wrong1", "data/sprites/wrong1.png"},
         {"wrong2", "data/sprites/wrong2.png"},
         {"wrong3", "data/sprites/wrong3.png"},
+        {"handnotebg", "data/sprites/openhandbg.png"},
+        {"queuenote", "data/sprites/queuenote.png"},
     };
 
     gAnimations = 
