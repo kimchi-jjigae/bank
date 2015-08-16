@@ -263,8 +263,13 @@ void MainState::handleMessage(const MouseClickMessage& message)
             {
                 if(gChequeDone && gPlayerQueueNumber == gQueueCounter)
                 {
+                    mBStateDelegator.gameBehaviour({150.0f, 480.0f}, "cashier");
                 }
-                mBStateDelegator.gameBehaviour({150.0f, 480.0f}, "cashier");
+            }
+            else if(type == "outdoors")
+            {
+                std::cout << "hi\n";
+                mBStateDelegator.gameBehaviour({14.0f, 522.0f}, "outdoors");
             }
         }
         else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
@@ -423,6 +428,11 @@ void MainState::initialize()
 
     // cashier
     hej = Character("cashier", glm::vec2(152.0f, 339.0f), true, mCashierTexture, glm::vec2(119.0f, 93.0f), false);
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // outdoors
+    hej = Character("outdoors", glm::vec2(20.0f, 529.0f), true, mCashierTexture, glm::vec2(119.0f, 93.0f), false);
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 }
