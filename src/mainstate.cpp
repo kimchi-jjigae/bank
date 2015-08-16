@@ -122,13 +122,16 @@ void MainState::update()
 
     if(!gPaintingRuined)
     {
-        // delete painting character
-        /*
+        int32_t index = 0;
         for(auto& iter : mCharacters)
         {
-            //
+            if(iter.mCharacterType == "painting")
+            {
+                mCharacters.erase(index);
+                break;
+            }
+            index++;
         }
-        */
     }
 }
 
