@@ -67,21 +67,16 @@ void MainState::update()
     if(mCurrentActivityState)
     {
         mCurrentActivityState->update();
-        for(auto iter : mCharacters)
-        {
-            iter.update();
-        }
 
         if(mCurrentActivityState->isFinished())
             mCurrentActivityState = nullptr;
     }
     else
     {
-        for(auto iter : mCharacters)
+        for(auto& iter : mCharacters)
         {
             iter.update();
         }
-
     }
 
     render();
@@ -164,7 +159,7 @@ void MainState::handleMessage(const MouseClickMessage& message)
     {
         /*
         std::list<Character> clickableChars;
-        for(auto iter : mCharacters)
+        for(auto& iter : mCharacters)
         {
         }
         */
@@ -202,7 +197,7 @@ void MainState::render()
     {
         mRenderer.queue(mBackgroundBack);
 
-        for(auto iter : mCharacters)
+        for(auto& iter : mCharacters)
         {
             mRenderer.queue(iter.getSprite());
         }
@@ -228,7 +223,8 @@ void MainState::initialize()
     mBus.send(PlayMusicMessage{"ambient_bank", false});
 
     // main player
-    mCharacters.push_back(Character("player", glm::vec2(600.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
+    mCharacters.push_back(Character("player", glm::vec2(600.0f, 200.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
+    mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
 }
 
 void MainState::updateNumbers()

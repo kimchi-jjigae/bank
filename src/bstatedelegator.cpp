@@ -12,9 +12,7 @@ void BehaviouralStateDelegator::playerWalk(glm::vec2 destination)
     mCharacters.front().clearBehaviours();
 
     std::shared_ptr<WalkingBState> walkState = std::make_shared<WalkingBState>(mBus, destination, 3.0f);
-    walkState->setOwner(&mCharacters.front());
     std::shared_ptr<IdleBState> idleState = std::make_shared<IdleBState>(mBus);
-    idleState->setOwner(&mCharacters.front());
 
     mCharacters.front().pushBehaviour(walkState);
     mCharacters.front().pushBehaviour(idleState);

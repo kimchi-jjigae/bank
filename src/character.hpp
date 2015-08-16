@@ -9,7 +9,7 @@ class BehaviouralState;
 class Character
 {
     public:
-        Character(std::string characterType, glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim);
+        Character(std::string characterType, glm::vec2 spritePos, bool interactive, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim);
         const fea::AnimatedQuad& getSprite();
         fea::AnimatedQuad& getSpriteRef();
         std::deque<std::shared_ptr<BehaviouralState>>& getBehaviouralStates();

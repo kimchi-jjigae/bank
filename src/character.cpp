@@ -2,7 +2,7 @@
 #include "behaviouralstate.hpp"
 #include <iostream>
 
-Character::Character(std::string characterType, glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim) :
+Character::Character(std::string characterType, glm::vec2 spritePos, bool interactive, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim) :
     mCharacterType(characterType),
     mInteractive(interactive)
 {
@@ -11,8 +11,6 @@ Character::Character(std::string characterType, glm::vec2 spritePos, bool intera
     mSprite.setTexture(texture);
     mSprite.setSize(spriteSize);
     mSprite.setPosition(spritePos);
-    initialBehaviour->setOwner(this);
-    mBehaviouralStates.push_back(initialBehaviour);
     mSprite.setAnimation(anim);
     mSprite.setOrigin(glm::vec2(spriteSize.x / 2.0f, spriteSize.y));
 }
@@ -55,6 +53,7 @@ void Character::setPosition(glm::vec2 pos)
 void Character::update()
 {
     mSprite.tick();
+
     if(!mBehaviouralStates.empty())
     {
         std::shared_ptr<BehaviouralState> state = mBehaviouralStates.front();
