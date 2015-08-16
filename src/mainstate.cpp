@@ -91,22 +91,29 @@ void MainState::update()
     }
     else
     {
-        for(auto& iter : mCharacters)
+        if(gMenuOver)
         {
-            iter.update();
+            for(auto& iter : mCharacters)
+            {
+                iter.update();
+            }
         }
     }
 
     render();
-    mBStateDelegator.update();
 
-    if(!mCurrentActivityState)
+    if(gMenuOver)
     {
-        mFramesToNextNumber--;
-        if(mFramesToNextNumber == 0)
+        mBStateDelegator.update();
+
+        if(!mCurrentActivityState)
         {
-            mBus.send(AdvanceQueueMessage());
-            mFramesToNextNumber = randomWaitTime();
+            mFramesToNextNumber--;
+            if(mFramesToNextNumber == 0)
+            {
+                mBus.send(AdvanceQueueMessage());
+                mFramesToNextNumber = randomWaitTime();
+            }
         }
     }
 }
@@ -279,8 +286,6 @@ void MainState::render()
 void MainState::initialize()
 {
     mInitialized = true;
-
-    mBus.send(PlayMusicMessage{"ambient_bank", true});
 
     // main player
     mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));

@@ -12,8 +12,6 @@ class MenuAState : public ActivityState
         virtual void handleMouseClick(const glm::uvec2& position) override;
         virtual void handleMouseRelease(const glm::uvec2& position) override;
     private:
-        int32_t mCounter;
-
         fea::Texture mBackgroundTexture;
         fea::Quad mBackground;
         fea::Texture mBackButtonTexture;
