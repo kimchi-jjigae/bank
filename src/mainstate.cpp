@@ -169,15 +169,20 @@ void MainState::handleMessage(const MouseClickMessage& message)
     }
     else
     {
-        /*
-        std::list<Character> clickableChars;
+        std::map<float, Character> clickableChars;
+
         for(auto& iter : mCharacters)
         {
+            auto& sprite = iter.getSprite();
+            float yPos = sprite.getPosition().y;
+            if(intersects(message.position, iter.getSprite()))
+            {
+                if(iter.mInteractive)
+                {
+                    clickableChars.emplace(yPos, iter);
+                }
+            }
         }
-        */
-        // std::vector characters
-        // for every character, check if it's at the click AND interactive
-            // add to characters vector
         // if characters != empty
             // sort(std::vector) by z-index
             // grab the first one, do interactive stuff
