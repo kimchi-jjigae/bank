@@ -17,6 +17,8 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBackgroundBack({1024.0f, 768.0f}),
     mBackgroundFront({1024.0f, 768.0f}),
     mPillar({116.0f, 569.0f}),
+    mBin({84.0f, 116.0f}),
+    mSofa({177.0f, 294.0f}),
     mTicketMachine({113.0f, 96.0f}),
     mFirstNumber({26.0f, 40.0f}),
     mSecondNumber({26.0f, 40.0f})
@@ -39,11 +41,19 @@ void MainState::setupGraphics()
     mPillarTexture = makeTexture(gTextures.at("pillar"));
     mPillar.setTexture(mPillarTexture);
 
+    mBinTexture = makeTexture(gTextures.at("bin"));
+    mBin.setTexture(mBinTexture);
+
+    mSofaTexture = makeTexture(gTextures.at("sofa"));
+    mSofa.setTexture(mSofaTexture);
+
     mTicketMachineTexture = makeTexture(gTextures.at("ticket_machine"));
 
     mBackgroundBack.setPosition({0.0f, 0.0f});
     mBackgroundFront.setPosition({0.0f, 0.0f});
     mPillar.setPosition({450.0f, 0.0f});
+    mBin.setPosition({520.0f, 440.0f});
+    mSofa.setPosition({847.0f, 340.0f});
     
     mPlayerTexture = makeTexture(gTextures.at("player"));
     mNumberTexture = makeTexture(gTextures.at("number_texture"));
@@ -230,6 +240,8 @@ void MainState::render()
         }
 
         mRenderer.queue(mPillar);
+        mRenderer.queue(mBin);
+        mRenderer.queue(mSofa);
 
         for(auto& sprite : mBeforePillar)
         {

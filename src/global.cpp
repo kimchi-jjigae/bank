@@ -27,6 +27,8 @@ void setupGlobals()
         {"explosion", "data/sprites/explosion.png"},
         {"whiteboard", "data/sprites/whiteboard.png"},
         {"painting", "data/sprites/tavla.png"},
+        {"bin", "data/sprites/bin.png"},
+        {"sofa", "data/sprites/sofa.png"},
     };
 
     gAnimations = 
