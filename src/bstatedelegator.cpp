@@ -49,6 +49,14 @@ void BehaviouralStateDelegator::gameBehaviour(glm::vec2 destination, std::string
     {
         gameState = std::make_shared<SelfBState>(mBus);
     }
+    else if(game == "cashier")
+    {
+        gameState = std::make_shared<CashierBState>(mBus);
+    }
+    else if(game == "outdoors")
+    {
+        gameState = std::make_shared<OutdoorBState>(mBus);
+    }
 
     if(game != "viewnote")
     {

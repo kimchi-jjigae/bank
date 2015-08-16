@@ -6,3 +6,5 @@
 #include "sudokubstate.hpp"
 #include "checkbstate.hpp"
 #include "selfbstate.hpp"
+#include "cashierbstate.hpp"
+#include "outdoorbstate.hpp"
