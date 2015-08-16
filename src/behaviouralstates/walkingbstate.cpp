@@ -13,7 +13,7 @@ WalkingBState::WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float sp
 void WalkingBState::switchTo()
 {
     const fea::Animation& anim = getAnimation("player", mAnimationType);
-    mCharacter->getSpriteRef().setAnimation(anim);
+    mCharacter->getSprite().setAnimation(anim);
     mSwitchedTo = true;
 }
 

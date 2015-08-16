@@ -12,7 +12,7 @@ IdleBState::IdleBState(fea::MessageBus& bus) :
 void IdleBState::switchTo()
 {
     const fea::Animation& anim = getAnimation("player", mAnimationType);
-    mCharacter->getSpriteRef().setAnimation(anim);
+    mCharacter->getSprite().setAnimation(anim);
     mSwitchedTo = true;
 }
 

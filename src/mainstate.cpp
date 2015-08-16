@@ -199,7 +199,12 @@ void MainState::render()
 
         for(auto& iter : mCharacters)
         {
-            mRenderer.queue(iter.getSprite());
+            auto& sprite = iter.getSprite();
+
+            float scale = 1.0f;
+
+            sprite.setScale({scale, scale});
+            mRenderer.queue(sprite);
         }
         mRenderer.queue(mPillar);
         mRenderer.queue(mTicketMachine);
