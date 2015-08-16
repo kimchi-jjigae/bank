@@ -11,6 +11,7 @@ class ActivityState
         virtual void handleMouseMove(const glm::uvec2& position) = 0;
         virtual void handleMouseClick(const glm::uvec2& position) = 0;
         virtual void handleMouseRelease(const glm::uvec2& position) = 0;
+        virtual void handleKeyPressed(int32_t position);
         bool isFinished() const;
     protected:
         fea::MessageBus& mBus;

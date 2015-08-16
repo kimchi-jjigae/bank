@@ -34,6 +34,17 @@ void setupGlobals()
         {"wallpainting", "data/sprites/wallpainting.png"},
         {"menubg", "data/sprites/menu.png"},
         {"menubutton", "data/sprites/menubutton.png"},
+        {"hangman_bg", "data/sprites/hangmanbg.png"},
+        {"r", "data/sprites/R.png"},
+        {"e", "data/sprites/E.png"},
+        {"y", "data/sprites/Y.png"},
+        {"k", "data/sprites/K.png"},
+        {"a", "data/sprites/A.png"},
+        {"v", "data/sprites/V.png"},
+        {"i", "data/sprites/I.png"},
+        {"wrong1", "data/sprites/wrong1.png"},
+        {"wrong2", "data/sprites/wrong2.png"},
+        {"wrong3", "data/sprites/wrong3.png"},
     };
 
     gAnimations = 

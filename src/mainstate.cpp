@@ -6,6 +6,7 @@
 #include "minigames.hpp"
 #include "randomwait.hpp"
 #include <map>
+#include <fea/userinterface.hpp>
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -149,24 +150,29 @@ void MainState::handleMessage(const MissNumberMessage& message)
 
 void MainState::handleMessage(const StartMinigameMessage& message)
 {
-    auto& name = message.name;
+    if(!mCurrentActivityState)
+    {
+        auto& name = message.name;
 
-    if(name == "outdoors")
-        mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
-    else if(name == "crossword")
-        mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
-    else if(name == "sudoku")
-        mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
-    else if(name == "childquestion")
-        mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
-    else if(name == "heartattack")
-        mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
-    else if(name == "whiteboard")
-        mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
-    else if(name == "painting")
-        mCurrentActivityState = std::unique_ptr<PaintingAState>(new PaintingAState(mBus, mRenderer));
-    else if(name == "menu")
-        mCurrentActivityState = std::unique_ptr<MenuAState>(new MenuAState(mBus, mRenderer));
+        if(name == "outdoors")
+            mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
+        else if(name == "crossword")
+            mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
+        else if(name == "sudoku")
+            mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
+        else if(name == "childquestion")
+            mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
+        else if(name == "heartattack")
+            mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
+        else if(name == "whiteboard")
+            mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
+        else if(name == "painting")
+            mCurrentActivityState = std::unique_ptr<PaintingAState>(new PaintingAState(mBus, mRenderer));
+        else if(name == "menu")
+            mCurrentActivityState = std::unique_ptr<MenuAState>(new MenuAState(mBus, mRenderer));
+        else if(name == "hangman")
+            mCurrentActivityState = std::unique_ptr<HangmanAState>(new HangmanAState(mBus, mRenderer));
+    }
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
@@ -221,6 +227,34 @@ void MainState::handleMessage(const MouseReleaseMessage& message)
     }
     else
     {
+        //behav deleg?
+    }
+}
+
+void MainState::handleMessage(const KeyPressedMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleKeyPressed(message.key);
+    }
+    else
+    {
+        if(message.key == fea::Keyboard:: O)
+            mBus.send(StartMinigameMessage{"outdoors"});
+        else if(message.key == fea::Keyboard:: C)
+            mBus.send(StartMinigameMessage{"crossword"});
+        else if(message.key == fea::Keyboard:: S)
+            mBus.send(StartMinigameMessage{"sudoku"});
+        else if(message.key == fea::Keyboard:: H)
+            mBus.send(StartMinigameMessage{"childquestion"});
+        else if(message.key == fea::Keyboard:: E)
+            mBus.send(StartMinigameMessage{"heartattack"});
+        else if(message.key == fea::Keyboard:: W)
+            mBus.send(StartMinigameMessage{"whiteboard"});
+        else if(message.key == fea::Keyboard:: P)
+            mBus.send(StartMinigameMessage{"painting"});
+        else if(message.key == fea::Keyboard:: A)
+            mBus.send(StartMinigameMessage{"hangman"});
         //behav deleg?
     }
 }

@@ -16,20 +16,8 @@ void InputHandler::process()
         {
             if(event.key.code == fea::Keyboard::ESCAPE)
                 mBus.send(QuitMessage());
-            else if(event.key.code == fea::Keyboard:: O)
-                mBus.send(StartMinigameMessage{"outdoors"});
-            else if(event.key.code == fea::Keyboard:: C)
-                mBus.send(StartMinigameMessage{"crossword"});
-            else if(event.key.code == fea::Keyboard:: S)
-                mBus.send(StartMinigameMessage{"sudoku"});
-            else if(event.key.code == fea::Keyboard:: H)
-                mBus.send(StartMinigameMessage{"childquestion"});
-            else if(event.key.code == fea::Keyboard:: E)
-                mBus.send(StartMinigameMessage{"heartattack"});
-            else if(event.key.code == fea::Keyboard:: W)
-                mBus.send(StartMinigameMessage{"whiteboard"});
-            else if(event.key.code == fea::Keyboard:: P)
-                mBus.send(StartMinigameMessage{"painting"});
+
+            mBus.send(KeyPressedMessage{event.key.code});
         }
         else if(event.type == fea::Event::CLOSED)
         {
