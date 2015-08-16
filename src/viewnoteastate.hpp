@@ -2,10 +2,10 @@
 #include "activitystate.hpp"
 #include <fea/render2d.hpp>
 
-class TakeNoteAState : public ActivityState
+class ViewNoteAState : public ActivityState
 {
     public:
-        TakeNoteAState(fea::MessageBus& bus, fea::Renderer2D& renderer);
+        ViewNoteAState(fea::MessageBus& bus, fea::Renderer2D& renderer);
         virtual void update() override;
         virtual void render() override;
         virtual void handleMouseMove(const glm::uvec2& position) override;
@@ -18,6 +18,10 @@ class TakeNoteAState : public ActivityState
         fea::Quad mBackButton;
         fea::Texture mNoteTexture;
         fea::Quad mNoteQuad;
+        fea::Texture mNoteBroken1Texture;
+        fea::Quad mNoteBroken1Quad;
+        fea::Texture mNoteBroken2Texture;
+        fea::Quad mNoteBroken2Quad;
         fea::Texture mNoteNumberTexture;
         fea::AnimatedQuad mFirstNumber;
         fea::AnimatedQuad mSecondNumber;
