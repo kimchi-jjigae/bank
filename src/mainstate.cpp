@@ -287,8 +287,6 @@ void MainState::handleMessage(const KeyPressedMessage& message)
     {
         if(message.key == fea::Keyboard:: O)
             mBus.send(StartMinigameMessage{"outdoors"});
-        else if(message.key == fea::Keyboard:: C)
-            mBus.send(StartMinigameMessage{"crossword"});
         else if(message.key == fea::Keyboard:: S)
             mBus.send(StartMinigameMessage{"sudoku"});
         else if(message.key == fea::Keyboard:: H)
@@ -297,17 +295,12 @@ void MainState::handleMessage(const KeyPressedMessage& message)
             mBus.send(StartMinigameMessage{"heartattack"});
         else if(message.key == fea::Keyboard:: W)
             mBus.send(StartMinigameMessage{"whiteboard"});
-        else if(message.key == fea::Keyboard:: P)
-            mBus.send(StartMinigameMessage{"painting"});
         else if(message.key == fea::Keyboard:: A)
             mBus.send(StartMinigameMessage{"hangman"});
         else if(message.key == fea::Keyboard:: T)
             mBus.send(StartMinigameMessage{"takenote"});
         else if(message.key == fea::Keyboard:: V)
             mBus.send(StartMinigameMessage{"viewnote"});
-        else if(message.key == fea::Keyboard:: Q)
-            mBus.send(StartMinigameMessage{"cheque"});
-        //behav deleg?
     }
 }
 
@@ -385,7 +378,7 @@ void MainState::initialize()
     mBus.send(StartMinigameMessage{"menu"});
 
     // main player
-    mCharacters.push_back(Character("player", glm::vec2(269.0f, 569.0f), true, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
+    mCharacters.push_back(Character("player", glm::vec2(269.0f, 569.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
     mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
 
     // ticket machine
