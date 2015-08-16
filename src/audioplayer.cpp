@@ -14,7 +14,8 @@ AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
         {"punch", "data/audio/Punch.ogg"},
         //music
         {"ambient_bank", "data/music/Ambankient.ogg"}
-    })
+    }),
+    mLoopMusic(false)
 {
     subscribe(mBus, *this);
 }
@@ -22,6 +23,14 @@ AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
 void AudioPlayer::update()
 {
     mAudioPlayer.update();
+
+    if(mLoopMusic)
+    {
+        if(mAudioPlayer.getStatus(mMusicHandle) == fea::EXPIRED)
+        {
+            mMusicHandle = mAudioPlayer.play(mFileStream);
+        }
+    }
 }
 
 void AudioPlayer::handleMessage(const PlayMusicMessage& message)
@@ -31,7 +40,7 @@ void AudioPlayer::handleMessage(const PlayMusicMessage& message)
     mAudioPlayer.stop(mMusicHandle);
     mMusicHandle = mAudioPlayer.play(mFileStream);
 
-    mAudioPlayer.setLooping(mMusicHandle, message.loop);
+    mLoopMusic = message.loop;
 }
 
 void AudioPlayer::handleMessage(const PlaySoundMessage& message)
