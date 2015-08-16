@@ -201,7 +201,8 @@ void MainState::render()
         {
             auto& sprite = iter.getSprite();
 
-            float scale = 1.0f;
+            float yPos = sprite.getPosition().y;
+            float scale = ((yPos - 430.0f) / 336.0f)/2.0f + 0.5f;
 
             sprite.setScale({scale, scale});
             mRenderer.queue(sprite);
