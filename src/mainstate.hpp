@@ -42,10 +42,14 @@ class MainState :
         int32_t mPlayerQueueNumber;
 
         //graphics
-        fea::Texture mBackgroundTexture;
+        fea::Texture mBackgroundBackTexture;
+        fea::Texture mBackgroundFrontTexture;
+        fea::Texture mPillarTexture;
         fea::Texture mPlayerTexture;
         fea::Texture mNumberTexture;
-        fea::Quad mBackground;
+        fea::Quad mBackgroundBack;
+        fea::Quad mBackgroundFront;
+        fea::Quad mPillar;
         fea::AnimatedQuad mFirstNumber;
         fea::AnimatedQuad mSecondNumber;
 };

@@ -12,7 +12,9 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mQueueCounter(28),
     mPlayerQueueNumber(38),
     //rendering
-    mBackground({1024.0f, 768.0f}),
+    mBackgroundBack({1024.0f, 768.0f}),
+    mBackgroundFront({1024.0f, 768.0f}),
+    mPillar({500.0f, 20.0f}),
     mFirstNumber({26.0f, 40.0f}),
     mSecondNumber({26.0f, 40.0f}),
     mBStateDelegator(bus, mCharacters)
@@ -24,8 +26,14 @@ void MainState::setupGraphics()
 {
     mRenderer.setup();
 
-    mBackgroundTexture = makeTexture(gTextures.at("bank_bg"));
-    mBackground.setTexture(mBackgroundTexture);
+    mBackgroundBackTexture = makeTexture(gTextures.at("bank_bg_b"));
+    mBackgroundBack.setTexture(mBackgroundBackTexture);
+
+    mBackgroundFrontTexture = makeTexture(gTextures.at("bank_bg_f"));
+    mBackgroundFront.setTexture(mBackgroundFrontTexture);
+
+    mPillarTexture = makeTexture(gTextures.at("pillar"));
+    mPillar.setTexture(mPillarTexture);
     
     mPlayerTexture = makeTexture(gTextures.at("player"));
     mNumberTexture = makeTexture(gTextures.at("number_texture"));
@@ -181,15 +189,17 @@ void MainState::render()
 
     if(!mCurrentActivityState)
     {
-        mRenderer.queue(mBackground);
+        mRenderer.queue(mBackgroundBack);
 
         for(auto iter : mCharacters)
         {
             mRenderer.queue(iter.getSprite());
         }
+        mRenderer.queue(mPillar);
 
         mRenderer.queue(mFirstNumber);
         mRenderer.queue(mSecondNumber);
+        mRenderer.queue(mBackgroundFront);
     }
     else
     {

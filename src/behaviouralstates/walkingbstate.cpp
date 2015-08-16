@@ -24,7 +24,7 @@ void WalkingBState::update()
     vel = glm::normalize(vel);
     mVelocity = vel * mSpeed;
     glm::vec2 nextPos;
-    nextPos = mCharacter->getPosition() + mVelocity;
+    nextPos = charPos + mVelocity;
     mCharacter->setPosition(nextPos);
 }
 

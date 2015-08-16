@@ -7,7 +7,9 @@ void setupGlobals()
 {
     gTextures = 
     {
-        {"bank_bg", "data/sprites/bank.png"},
+        {"bank_bg_f", "data/sprites/bg_back.png"},
+        {"bank_bg_b", "data/sprites/bg_front.png"},
+        {"pillar", "data/sprites/pillar.png"},
         {"outside", "data/sprites/Outside.png"},
         {"player", "data/sprites/player.png"},
         {"crossword", "data/sprites/crossword.png"},
