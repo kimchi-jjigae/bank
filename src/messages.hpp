@@ -54,3 +54,8 @@ struct MouseMoveMessage
 {
     glm::uvec2 position;
 };
+
+struct KeyPressedMessage
+{
+    int32_t key;
+};

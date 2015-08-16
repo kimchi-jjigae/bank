@@ -7,3 +7,4 @@
 #include "whiteboardastate.hpp"
 #include "paintingastate.hpp"
 #include "menuastate.hpp"
+#include "hangmanastate.hpp"

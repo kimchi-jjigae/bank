@@ -2,3 +2,5 @@
 #include "walkingbstate.hpp"
 #include "ticketbstate.hpp"
 #include "paintingbstate.hpp"
+#include "crosswordbstate.hpp"
+#include "sudokubstate.hpp"

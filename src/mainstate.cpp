@@ -6,6 +6,7 @@
 #include "minigames.hpp"
 #include "randomwait.hpp"
 #include <map>
+#include <fea/userinterface.hpp>
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -55,6 +56,8 @@ void MainState::setupGraphics()
     mWallPainting.setPosition({984.0f, 200.0f});
 
     mTicketMachineTexture = makeTexture(gTextures.at("ticket_machine"));
+    mCrosswordTexture = makeTexture(gTextures.at("crosswordt"));
+    mSudokuTexture = makeTexture(gTextures.at("sudokut"));
 
     mBackgroundBack.setPosition({0.0f, 0.0f});
     mBackgroundFront.setPosition({0.0f, 0.0f});
@@ -91,22 +94,29 @@ void MainState::update()
     }
     else
     {
-        for(auto& iter : mCharacters)
+        if(gMenuOver)
         {
-            iter.update();
+            for(auto& iter : mCharacters)
+            {
+                iter.update();
+            }
         }
     }
 
     render();
-    mBStateDelegator.update();
 
-    if(!mCurrentActivityState)
+    if(gMenuOver)
     {
-        mFramesToNextNumber--;
-        if(mFramesToNextNumber == 0)
+        mBStateDelegator.update();
+
+        if(!mCurrentActivityState)
         {
-            mBus.send(AdvanceQueueMessage());
-            mFramesToNextNumber = randomWaitTime();
+            mFramesToNextNumber--;
+            if(mFramesToNextNumber == 0)
+            {
+                mBus.send(AdvanceQueueMessage());
+                mFramesToNextNumber = randomWaitTime();
+            }
         }
     }
 
@@ -153,24 +163,29 @@ void MainState::handleMessage(const MissNumberMessage& message)
 
 void MainState::handleMessage(const StartMinigameMessage& message)
 {
-    auto& name = message.name;
+    if(!mCurrentActivityState)
+    {
+        auto& name = message.name;
 
-    if(name == "outdoors")
-        mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
-    else if(name == "crossword")
-        mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
-    else if(name == "sudoku")
-        mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
-    else if(name == "childquestion")
-        mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
-    else if(name == "heartattack")
-        mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
-    else if(name == "whiteboard")
-        mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
-    else if(name == "painting")
-        mCurrentActivityState = std::unique_ptr<PaintingAState>(new PaintingAState(mBus, mRenderer));
-    else if(name == "menu")
-        mCurrentActivityState = std::unique_ptr<MenuAState>(new MenuAState(mBus, mRenderer));
+        if(name == "outdoors")
+            mCurrentActivityState = std::unique_ptr<OutdoorsAState>(new OutdoorsAState(mBus, mRenderer));
+        else if(name == "crossword")
+            mCurrentActivityState = std::unique_ptr<CrosswordAState>(new CrosswordAState(mBus, mRenderer));
+        else if(name == "sudoku")
+            mCurrentActivityState = std::unique_ptr<SudokuAState>(new SudokuAState(mBus, mRenderer));
+        else if(name == "childquestion")
+            mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
+        else if(name == "heartattack")
+            mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
+        else if(name == "whiteboard")
+            mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
+        else if(name == "painting")
+            mCurrentActivityState = std::unique_ptr<PaintingAState>(new PaintingAState(mBus, mRenderer));
+        else if(name == "menu")
+            mCurrentActivityState = std::unique_ptr<MenuAState>(new MenuAState(mBus, mRenderer));
+        else if(name == "hangman")
+            mCurrentActivityState = std::unique_ptr<HangmanAState>(new HangmanAState(mBus, mRenderer));
+    }
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
@@ -221,6 +236,14 @@ void MainState::handleMessage(const MouseClickMessage& message)
             {
                 mBStateDelegator.gameBehaviour({906.0f, 496.0f}, "painting");
             }
+            else if(type == "crossword")
+            {
+                mBStateDelegator.gameBehaviour({714.0f, 658.0f}, "crossword");
+            }
+            else if(type == "sudoku")
+            {
+                mBStateDelegator.gameBehaviour({714.0f, 658.0f}, "sudoku");
+            }
         }
         else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
         {
@@ -242,6 +265,34 @@ void MainState::handleMessage(const MouseReleaseMessage& message)
     }
 }
 
+void MainState::handleMessage(const KeyPressedMessage& message)
+{
+    if(mCurrentActivityState)
+    {
+        mCurrentActivityState->handleKeyPressed(message.key);
+    }
+    else
+    {
+        if(message.key == fea::Keyboard:: O)
+            mBus.send(StartMinigameMessage{"outdoors"});
+        else if(message.key == fea::Keyboard:: C)
+            mBus.send(StartMinigameMessage{"crossword"});
+        else if(message.key == fea::Keyboard:: S)
+            mBus.send(StartMinigameMessage{"sudoku"});
+        else if(message.key == fea::Keyboard:: H)
+            mBus.send(StartMinigameMessage{"childquestion"});
+        else if(message.key == fea::Keyboard:: E)
+            mBus.send(StartMinigameMessage{"heartattack"});
+        else if(message.key == fea::Keyboard:: W)
+            mBus.send(StartMinigameMessage{"whiteboard"});
+        else if(message.key == fea::Keyboard:: P)
+            mBus.send(StartMinigameMessage{"painting"});
+        else if(message.key == fea::Keyboard:: A)
+            mBus.send(StartMinigameMessage{"hangman"});
+        //behav deleg?
+    }
+}
+
 void MainState::render()
 {
     mRenderer.clear();
@@ -252,6 +303,7 @@ void MainState::render()
 
         std::map<float, fea::AnimatedQuad> mBehindPillar;
         std::map<float, fea::AnimatedQuad> mBeforePillar;
+        std::map<float, fea::AnimatedQuad> mAfterForeground;
 
         for(auto& iter : mCharacters)
         {
@@ -265,7 +317,9 @@ void MainState::render()
                 sprite.setScale({scale, scale});
             }
 
-            if(yPos > 546.0f)
+            if(yPos > 658.0f)
+                mAfterForeground.emplace(yPos, sprite);
+            else if(yPos > 546.0f)
                 mBeforePillar.emplace(yPos, sprite);
             else
                 mBehindPillar.emplace(yPos, sprite);
@@ -288,6 +342,12 @@ void MainState::render()
         mRenderer.queue(mFirstNumber);
         mRenderer.queue(mSecondNumber);
         mRenderer.queue(mBackgroundFront);
+
+        for(auto& sprite : mAfterForeground)
+        {
+            mRenderer.queue(sprite.second);
+        }
+
     }
     else
     {
@@ -300,8 +360,6 @@ void MainState::render()
 void MainState::initialize()
 {
     mInitialized = true;
-
-    mBus.send(PlayMusicMessage{"ambient_bank", true});
 
     // main player
     mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
@@ -318,9 +376,20 @@ void MainState::initialize()
     mCharacters.push_back(hej);
 
     // painting
-    hej = Character("painting", glm::vec2(1006.0f, 420.0f), true, mWallPaintingTexture, glm::vec2(40.0f, 116.0f), false);
+    hej = Character("painting", glm::vec2(1006.0f, 320.0f), true, mWallPaintingTexture, glm::vec2(40.0f, 116.0f), false);
     asdf = hej.getSprite().getSize();
-    hej.getSprite().setOrigin({asdf.x / 2.0f, asdf.y * 2.25f});
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // crossword
+    hej = Character("crossword", glm::vec2(800.0f, 764.0f), true, mCrosswordTexture, glm::vec2(156.0f, 94.0f), false);
+    asdf = hej.getSprite().getSize();
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // sudoku
+    hej = Character("sudoku", glm::vec2(780.0f, 764.0f), true, mSudokuTexture, glm::vec2(156.0f, 94.0f), false);
+    asdf = hej.getSprite().getSize();
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 }

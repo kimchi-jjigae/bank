@@ -33,6 +33,14 @@ void BehaviouralStateDelegator::gameBehaviour(glm::vec2 destination, std::string
     {
         gameState = std::make_shared<PaintingBState>(mBus);
     }
+    else if(game == "crossword")
+    {
+        gameState = std::make_shared<CrosswordBState>(mBus);
+    }
+    else if(game == "sudoku")
+    {
+        gameState = std::make_shared<SudokuBState>(mBus);
+    }
 
     mCharacters.front().pushBehaviour(walkState);
     mCharacters.front().pushBehaviour(gameState);

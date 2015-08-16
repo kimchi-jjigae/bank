@@ -3,13 +3,16 @@
 std::unordered_map<std::string, std::string> gTextures = {};
 std::unordered_map<std::string, std::unordered_map<std::string, fea::Animation>> gAnimations = {};
 bool gPaintingRuined = false;
+bool gMenuOver = false;
 
 void setupGlobals()
 {
     gTextures = 
     {
         {"player", "data/sprites/player.png"},
+        {"crosswordt", "data/sprites/crossword_table.png"},
         {"sudoku", "data/sprites/sudoku.png"},
+        {"sudokut", "data/sprites/sudoku_table.png"},
         {"pillar", "data/sprites/pillar.png"},
         {"outside", "data/sprites/Outside.png"},
         {"bank_bg_b", "data/sprites/bg_back.png"},
@@ -31,8 +34,19 @@ void setupGlobals()
         {"bin", "data/sprites/bin.png"},
         {"sofa", "data/sprites/sofa.png"},
         {"wallpainting", "data/sprites/wallpainting.png"},
-        {"menubg", "data/sprites/menubg.png"},
+        {"menubg", "data/sprites/menu.png"},
         {"menubutton", "data/sprites/menubutton.png"},
+        {"hangman_bg", "data/sprites/hangmanbg.png"},
+        {"r", "data/sprites/R.png"},
+        {"e", "data/sprites/E.png"},
+        {"y", "data/sprites/Y.png"},
+        {"k", "data/sprites/K.png"},
+        {"a", "data/sprites/A.png"},
+        {"v", "data/sprites/V.png"},
+        {"i", "data/sprites/I.png"},
+        {"wrong1", "data/sprites/wrong1.png"},
+        {"wrong2", "data/sprites/wrong2.png"},
+        {"wrong3", "data/sprites/wrong3.png"},
     };
 
     gAnimations = 
@@ -55,6 +69,24 @@ void setupGlobals()
         },
         {
             "painting", 
+            {
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+            },
+        },
+        {
+            "crossword", 
+            {
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+            },
+        },
+        {
+            "sudoku", 
+            {
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+            },
+        },
+        {
+            "newspaper", 
             {
                 {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
             },

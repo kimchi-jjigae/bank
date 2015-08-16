@@ -7,6 +7,11 @@ ActivityState::ActivityState(fea::MessageBus& bus, fea::Renderer2D& renderer):
 {
 }
 
+void ActivityState::handleKeyPressed(int32_t position)
+{
+    (void)position;
+}
+
 bool ActivityState::isFinished() const
 {
     return mIsFinished;

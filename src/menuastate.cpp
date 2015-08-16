@@ -5,29 +5,19 @@
 
 MenuAState::MenuAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
     ActivityState(bus, renderer),
-    mCounter(600),
     mBackground({1024.0f, 768.0f}),
-    mBackButton({206.0f, 100.0f})
+    mBackButton({515.0f, 150.0f})
 {
     mBackgroundTexture = makeTexture(gTextures.at("menubg"));
     mBackground.setTexture(mBackgroundTexture);
 
-    mBackButtonTexture = makeTexture(gTextures.at("back_button"));
+    mBackButtonTexture = makeTexture(gTextures.at("menubutton"));
     mBackButton.setTexture(mBackButtonTexture);
-    mBackButton.setPosition({35.0f, 640.0f});
-
-    mBus.send(PlaySoundMessage{"sigh", false});
+    mBackButton.setPosition({240.0f, 585.0f});
 }
 
 void MenuAState::update()
 {
-    mCounter--;
-
-    if(mCounter == 0)
-    {
-        mIsFinished = true;
-        mBus.send(MissNumberMessage());
-    }
 }
 
 void MenuAState::render()
@@ -46,6 +36,9 @@ void MenuAState::handleMouseClick(const glm::uvec2& position)
     if(intersects(position, mBackButton))
     {
         mIsFinished = true;
+        gMenuOver = true;
+
+        mBus.send(PlayMusicMessage{"ambient_bank", true});
     }
 }
 
