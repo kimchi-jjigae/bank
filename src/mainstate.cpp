@@ -323,6 +323,8 @@ void MainState::handleMessage(const KeyPressedMessage& message)
             mBus.send(StartMinigameMessage{"takenote"});
         else if(message.key == fea::Keyboard:: V)
             mBus.send(StartMinigameMessage{"viewnote"});
+        else if(message.key == fea::Keyboard:: Z)
+            mBus.send(AdvanceQueueMessage{});
     }
 }
 
