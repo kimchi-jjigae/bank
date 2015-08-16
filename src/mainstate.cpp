@@ -432,7 +432,7 @@ void MainState::initialize()
     mCharacters.push_back(hej);
 
     // outdoors
-    hej = Character("outdoors", glm::vec2(20.0f, 529.0f), true, mCashierTexture, glm::vec2(119.0f, 93.0f), false);
+    hej = Character("outdoors", glm::vec2(46.0f, 560.0f), true, mCashierTexture, glm::vec2(119.0f, 93.0f), false);
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 }
