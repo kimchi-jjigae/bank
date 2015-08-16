@@ -120,14 +120,16 @@ void MainState::update()
         }
     }
 
-    if(!gPaintingRuined)
+    if(gPaintingRuined)
     {
         int32_t index = 0;
         for(auto& iter : mCharacters)
         {
             if(iter.mCharacterType == "painting")
             {
-                mCharacters.erase(index);
+                auto iterator = mCharacters.begin();
+                std::advance(iterator, index);
+                mCharacters.erase(iterator);
                 break;
             }
             index++;
