@@ -6,7 +6,7 @@ enum Direction {
     BACKWARDS,
     LEFTWARDS,
     RIGHTWARDS
-}
+};
 
 class WalkingBState : public BehaviouralState
 {

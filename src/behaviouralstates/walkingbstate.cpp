@@ -1,5 +1,5 @@
 #include "walkingbstate.hpp"
-#include <math>
+#include <cmath>
 #include "../global.hpp"
 
 WalkingBState::WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float speed) :
@@ -26,7 +26,7 @@ void WalkingBState::update()
     mVelocity = direction * mSpeed;
 
     // working out the direction:
-    float angle = atan2(direction.y, direction.x);
+    float angle = (float)atan2(direction.y, direction.x);
     if(angle >= -0.75f * glm::pi<float>() && angle < -0.25f * glm::pi<float>())
     {
         // downwards
