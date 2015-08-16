@@ -50,6 +50,9 @@ class MainState :
         fea::Texture mBinTexture;
         fea::Texture mSofaTexture;
         fea::Texture mTicketMachineTexture;
+        fea::Texture mCrosswordTexture;
+        fea::Texture mSudokuTexture;
+        fea::Texture mCheckTexture;
         fea::Texture mPlayerTexture;
         fea::Texture mNumberTexture;
         fea::Texture mWallPaintingTexture;

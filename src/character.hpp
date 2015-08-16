@@ -22,10 +22,9 @@ class Character
         bool topBehaviourFinished();
         void popTopBehaviour();
         bool mScaled;
+        bool mInteractive;
 
     private:
-        //glm::vec2 mClickablePosition;
-        bool mInteractive;
         // id mInteractionActivityStateId;
         std::deque<std::shared_ptr<BehaviouralState>> mBehaviouralStates;
         fea::AnimatedQuad mSprite;

@@ -9,6 +9,7 @@ class BehaviouralStateDelegator
     public:
         BehaviouralStateDelegator(fea::MessageBus& bus, std::list<Character>& characters);
         void playerWalk(glm::vec2 destination);
+        void gameBehaviour(glm::vec2 destination, std::string game);
         void update();
 
     private:

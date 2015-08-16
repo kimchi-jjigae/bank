@@ -54,6 +54,9 @@ void MainState::setupGraphics()
     mWallPainting.setPosition({984.0f, 200.0f});
 
     mTicketMachineTexture = makeTexture(gTextures.at("ticket_machine"));
+    mCrosswordTexture = makeTexture(gTextures.at("crosswordt"));
+    mSudokuTexture = makeTexture(gTextures.at("sudokut"));
+    mCheckTexture = makeTexture(gTextures.at("checkt"));
 
     mBackgroundBack.setPosition({0.0f, 0.0f});
     mBackgroundFront.setPosition({0.0f, 0.0f});
@@ -114,6 +117,17 @@ void MainState::update()
                 mFramesToNextNumber = randomWaitTime();
             }
         }
+    }
+
+    if(!gPaintingRuined)
+    {
+        // delete painting character
+        /*
+        for(auto& iter : mCharacters)
+        {
+            //
+        }
+        */
     }
 }
 
@@ -189,7 +203,6 @@ void MainState::handleMessage(const MouseMoveMessage& message)
     }
     else
     {
-        //behav deleg?
     }
 }
 
@@ -201,23 +214,52 @@ void MainState::handleMessage(const MouseClickMessage& message)
     }
     else
     {
-        /*
-        std::list<Character> clickableChars;
+        std::map<float, Character> clickableChars;
+
         for(auto& iter : mCharacters)
         {
+            auto& sprite = iter.getSprite();
+            float yPos = sprite.getPosition().y;
+            if(intersects(message.position, iter.getSprite()))
+            {
+                if(iter.mInteractive)
+                {
+                    clickableChars.emplace(yPos, iter);
+                }
+            }
         }
-        */
-        // std::vector characters
-        // for every character, check if it's at the click AND interactive
-            // add to characters vector
-        // if characters != empty
-            // sort(std::vector) by z-index
+        if(!clickableChars.empty())
+        {
             // grab the first one, do interactive stuff
-        // else if click spot is out of bounds
-            // do nothing
-        // else
-            // walk to spot
-        if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
+            Character car = clickableChars.rbegin()->second;
+            std::string type = car.mCharacterType;
+
+            if(type == "player")
+            {
+                mBStateDelegator.gameBehaviour({0.0f, 0.0f}, "viewnote");
+            }
+            if(type == "ticket_machine")
+            {
+                mBStateDelegator.gameBehaviour({454.0f, 561.0f}, "ticket_machine");
+            }
+            else if(type == "painting")
+            {
+                mBStateDelegator.gameBehaviour({906.0f, 496.0f}, "painting");
+            }
+            else if(type == "crossword")
+            {
+                mBStateDelegator.gameBehaviour({714.0f, 658.0f}, "crossword");
+            }
+            else if(type == "sudoku")
+            {
+                mBStateDelegator.gameBehaviour({714.0f, 658.0f}, "sudoku");
+            }
+            else if(type == "check")
+            {
+                mBStateDelegator.gameBehaviour({583.0f, 485.0f}, "check");
+            }
+        }
+        else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
         {
             if(mBackgroundMask.getPixel(message.position.x, message.position.y) == fea::Color::Black)
                 mBStateDelegator.playerWalk(message.position);
@@ -247,8 +289,6 @@ void MainState::handleMessage(const KeyPressedMessage& message)
     {
         if(message.key == fea::Keyboard:: O)
             mBus.send(StartMinigameMessage{"outdoors"});
-        else if(message.key == fea::Keyboard:: C)
-            mBus.send(StartMinigameMessage{"crossword"});
         else if(message.key == fea::Keyboard:: S)
             mBus.send(StartMinigameMessage{"sudoku"});
         else if(message.key == fea::Keyboard:: H)
@@ -259,17 +299,12 @@ void MainState::handleMessage(const KeyPressedMessage& message)
             mBus.send(StartMinigameMessage{"runerrand"});
         else if(message.key == fea::Keyboard:: W)
             mBus.send(StartMinigameMessage{"whiteboard"});
-        else if(message.key == fea::Keyboard:: P)
-            mBus.send(StartMinigameMessage{"painting"});
         else if(message.key == fea::Keyboard:: A)
             mBus.send(StartMinigameMessage{"hangman"});
         else if(message.key == fea::Keyboard:: T)
             mBus.send(StartMinigameMessage{"takenote"});
         else if(message.key == fea::Keyboard:: V)
             mBus.send(StartMinigameMessage{"viewnote"});
-        else if(message.key == fea::Keyboard:: Q)
-            mBus.send(StartMinigameMessage{"cheque"});
-        //behav deleg?
     }
 }
 
@@ -283,6 +318,7 @@ void MainState::render()
 
         std::map<float, fea::AnimatedQuad> mBehindPillar;
         std::map<float, fea::AnimatedQuad> mBeforePillar;
+        std::map<float, fea::AnimatedQuad> mAfterForeground;
 
         for(auto& iter : mCharacters)
         {
@@ -296,7 +332,9 @@ void MainState::render()
                 sprite.setScale({scale, scale});
             }
 
-            if(yPos > 546.0f)
+            if(yPos > 658.0f)
+                mAfterForeground.emplace(yPos, sprite);
+            else if(yPos > 546.0f)
                 mBeforePillar.emplace(yPos, sprite);
             else
                 mBehindPillar.emplace(yPos, sprite);
@@ -311,9 +349,6 @@ void MainState::render()
         mRenderer.queue(mBin);
         mRenderer.queue(mSofa);
 
-        if(!gPaintingRuined)
-            mRenderer.queue(mWallPainting);
-
         for(auto& sprite : mBeforePillar)
         {
             mRenderer.queue(sprite.second);
@@ -322,6 +357,12 @@ void MainState::render()
         mRenderer.queue(mFirstNumber);
         mRenderer.queue(mSecondNumber);
         mRenderer.queue(mBackgroundFront);
+
+        for(auto& sprite : mAfterForeground)
+        {
+            mRenderer.queue(sprite.second);
+        }
+
     }
     else
     {
@@ -338,17 +379,37 @@ void MainState::initialize()
     gQueueCounter = 28;
     updateNumbers();
 
-    // main player
-    mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
-    mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
-
-
     mBus.send(StartMinigameMessage{"menu"});
+
+    // main player
+    mCharacters.push_back(Character("player", glm::vec2(269.0f, 569.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
+    mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
 
     // ticket machine
     Character hej = Character("ticket_machine", glm::vec2(470.0f, 548.0f), true, mTicketMachineTexture, glm::vec2(113.0f, 96.0f), false);
     glm::vec2 asdf = hej.getSprite().getSize();
     hej.getSprite().setOrigin({asdf.x / 2.0f, asdf.y * 2.25f});
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // painting
+    hej = Character("painting", glm::vec2(1006.0f, 320.0f), true, mWallPaintingTexture, glm::vec2(40.0f, 116.0f), false);
+    asdf = hej.getSprite().getSize();
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // crossword
+    hej = Character("crossword", glm::vec2(800.0f, 764.0f), true, mCrosswordTexture, glm::vec2(156.0f, 94.0f), false);
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // sudoku
+    hej = Character("sudoku", glm::vec2(780.0f, 764.0f), true, mSudokuTexture, glm::vec2(156.0f, 94.0f), false);
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // cheques
+    hej = Character("check", glm::vec2(588.0f, 337.0f), true, mCheckTexture, glm::vec2(43.0f, 31.0f), false);
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 }
