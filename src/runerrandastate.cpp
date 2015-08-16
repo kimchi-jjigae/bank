@@ -12,14 +12,18 @@ RunErrandAState::RunErrandAState(fea::MessageBus& bus, fea::Renderer2D& renderer
     mExplosion({240.0f, 217.0f}),
     mChequeTable({106.0f, 33.0f}),
     mNote({50.0f, 50.0f}),
+    mCover({1024.0f, 768.0f}),
     mHitting(false),
     mExplosionCounter(0),
     mHitCount(0),
     mNoteDown(false),
     mChequeDown(false),
-    mNo(false)
+    mNo(false),
+    mNoCounter(180),
+    mFade(false)
 {
     mBackgroundTexture = makeTexture(gTextures.at("cashier"));
+    mBackgroundTexture2 = makeTexture(gTextures.at("nocashier"));
     mBackground.setTexture(mBackgroundTexture);
 
     mBackButtonTexture = makeTexture(gTextures.at("back_button"));
@@ -47,6 +51,9 @@ RunErrandAState::RunErrandAState(fea::MessageBus& bus, fea::Renderer2D& renderer
     mNote.setPosition({674.0f, 684.0f});
 
     mBus.send(PlaySoundMessage{"sigh", false});
+
+    mCover.setColor(fea::Color::Black);
+    mCover.setOpacity(0.0f);
 }
 
 void RunErrandAState::update()
@@ -54,6 +61,20 @@ void RunErrandAState::update()
     //mBus.send(MissNumberMessage());
     if(mExplosionCounter > 0)
         mExplosionCounter--;
+
+    if(!mNo && mNoteDown && mChequeDown)
+    {
+        mNoCounter--;
+
+        if(mNoCounter == 0)
+            mNo = true;
+    }
+
+    if(mFade)
+    {
+        float newOp = std::min(mCover.getOpacity() + 0.01f, 1.0f);
+        mCover.setOpacity(newOp);
+    }
 }
 
 void RunErrandAState::render()
@@ -78,6 +99,7 @@ void RunErrandAState::render()
 
 
     mRenderer.queue(mBackButton);
+    mRenderer.queue(mCover);
 }
 
 void RunErrandAState::handleMouseMove(const glm::uvec2& position)
@@ -102,12 +124,26 @@ void RunErrandAState::handleMouseClick(const glm::uvec2& position)
         if(mNo)
         {
             mHitting = true;
+            mFade = true;
             mBus.send(PlaySoundMessage{"punch", false});
 
             mExplosion.setPosition((glm::vec2)position);
             mExplosionCounter = 10;
 
             mHitCount++;
+        }
+        
+        if(!mNoteDown)
+        {
+            mNoteDown = true;
+        }
+        else
+        {
+            if(!mChequeDown)
+            {
+                mChequeDown = true;
+                mBackground.setTexture(mBackgroundTexture2); 
+            }
         }
     }
 }

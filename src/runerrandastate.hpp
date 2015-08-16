@@ -13,6 +13,7 @@ class RunErrandAState : public ActivityState
         virtual void handleMouseRelease(const glm::uvec2& position) override;
     private:
         fea::Texture mBackgroundTexture;
+        fea::Texture mBackgroundTexture2;
         fea::Quad mBackground;
         fea::Texture mBackButtonTexture;
         fea::Quad mBackButton;
@@ -27,6 +28,8 @@ class RunErrandAState : public ActivityState
         fea::Texture mNoteTexture;
         fea::Quad mNote;
 
+        fea::Quad mCover;
+
         bool mHitting;
         int32_t mExplosionCounter;
         int32_t mHitCount;
@@ -34,4 +37,7 @@ class RunErrandAState : public ActivityState
         bool mNoteDown;
         bool mChequeDown;
         bool mNo;
+        int32_t mNoCounter;
+
+        bool mFade;
 };
