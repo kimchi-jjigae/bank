@@ -184,26 +184,34 @@ void MainState::handleMessage(const MouseClickMessage& message)
     {
         std::map<float, Character> clickableChars;
 
+        std::cout << "clicked\n";
         for(auto& iter : mCharacters)
         {
             auto& sprite = iter.getSprite();
             float yPos = sprite.getPosition().y;
+            std::cout << intersects(message.position, iter.getSprite()) << "\n";
             if(intersects(message.position, iter.getSprite()))
             {
+                std::cout << "intersect\n";
                 if(iter.mInteractive)
                 {
                     clickableChars.emplace(yPos, iter);
                 }
             }
         }
-        // if characters != empty
-            // sort(std::vector) by z-index
+        if(!clickableChars.empty())
+        {
             // grab the first one, do interactive stuff
-        // else if click spot is out of bounds
-            // do nothing
-        // else
-            // walk to spot
-        if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
+            std::cout << "stuff clicked on\n";
+            Character car = clickableChars.rbegin()->second;
+            std::string type = car.mCharacterType;
+
+            if(type == "ticket_machine")
+            {
+                mBStateDelegator.takeTicket({454.0f, 561.0f});
+            }
+        }
+        else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
         {
             if(mBackgroundMask.getPixel(message.position.x, message.position.y) == fea::Color::Black)
                 mBStateDelegator.playerWalk(message.position);
