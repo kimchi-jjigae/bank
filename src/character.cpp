@@ -4,12 +4,11 @@
 
 Character::Character(std::string characterType, glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim) :
     mCharacterType(characterType),
-    mSpritePosition(spritePos),
     mInteractive(interactive)
 {
     mSprite.setTexture(texture);
     mSprite.setSize(spriteSize);
-    mSprite.setPosition(mSpritePosition);
+    mSprite.setPosition(spritePos);
     initialBehaviour->setOwner(this);
     mBehaviouralStates.push_back(initialBehaviour);
     mSprite.setAnimation(anim);
@@ -43,13 +42,12 @@ void Character::pushBehaviour(std::shared_ptr<BehaviouralState> state)
 
 glm::vec2 Character::getPosition()
 {
-    return mSpritePosition;
+    return mSprite.getPosition();
 }
 
 void Character::setPosition(glm::vec2 pos)
 {
-    mSpritePosition = pos;
-    mSprite.setPosition(mSpritePosition);
+    mSprite.setPosition(pos);
 }
 
 void Character::update()

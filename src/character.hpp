@@ -21,7 +21,6 @@ class Character
         void pushBehaviour(std::shared_ptr<BehaviouralState> state);
 
     private:
-        glm::vec2 mSpritePosition;
         //glm::vec2 mClickablePosition;
         bool mInteractive;
         // id mInteractionActivityStateId;
