@@ -4,6 +4,7 @@
 #include "texturemaker.hpp"
 #include "global.hpp"
 #include "minigames.hpp"
+#include <map>
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBus(bus),
@@ -50,8 +51,8 @@ void MainState::setupGraphics()
     mFirstNumber.setTexture(mNumberTexture);
     mSecondNumber.setTexture(mNumberTexture);
 
-    mFirstNumber.setPosition({464.0f, 89.0f});
-    mSecondNumber.setPosition({492.0f, 89.0f});
+    mFirstNumber.setPosition({480.0f, 175.0f});
+    mSecondNumber.setPosition({508.0f, 175.0f});
 
     mFirstNumber.setAnimation(getAnimation("number", "4"));
     mSecondNumber.setAnimation(getAnimation("number", "5"));
@@ -197,6 +198,9 @@ void MainState::render()
     {
         mRenderer.queue(mBackgroundBack);
 
+        std::map<float, fea::AnimatedQuad> mBehindPillar;
+        std::map<float, fea::AnimatedQuad> mBeforePillar;
+
         for(auto& iter : mCharacters)
         {
             auto& sprite = iter.getSprite();
@@ -205,10 +209,25 @@ void MainState::render()
             float scale = ((yPos - 430.0f) / 336.0f)/2.0f + 0.5f;
 
             sprite.setScale({scale, scale});
-            mRenderer.queue(sprite);
+
+            if(yPos > 546.0f)
+                mBeforePillar.emplace(yPos, sprite);
+            else
+                mBehindPillar.emplace(yPos, sprite);
         }
+
+        for(auto& sprite : mBehindPillar)
+        {
+            mRenderer.queue(sprite.second);
+        }
+
         mRenderer.queue(mPillar);
         mRenderer.queue(mTicketMachine);
+
+        for(auto& sprite : mBeforePillar)
+        {
+            mRenderer.queue(sprite.second);
+        }
 
         mRenderer.queue(mFirstNumber);
         mRenderer.queue(mSecondNumber);
