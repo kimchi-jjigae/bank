@@ -1,6 +1,13 @@
 #pragma once
 #include "../behaviouralstate.hpp"
 
+enum Direction {
+    FORWARDS = 0,
+    BACKWARDS,
+    LEFTWARDS,
+    RIGHTWARDS
+};
+
 class WalkingBState : public BehaviouralState
 {
     public:

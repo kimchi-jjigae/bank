@@ -5,6 +5,7 @@ BehaviouralState::BehaviouralState(fea::MessageBus& bus) :
     mCharacter(nullptr)
 {
     mSwitchedTo = false;
+    mFinished = false;
 }
 
 std::string BehaviouralState::getAnimationType()

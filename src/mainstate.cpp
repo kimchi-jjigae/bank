@@ -93,6 +93,7 @@ void MainState::update()
     }
 
     render();
+    mBStateDelegator.update();
 
     if(!mCurrentActivityState)
     {
@@ -266,7 +267,7 @@ void MainState::initialize()
     mBus.send(PlayMusicMessage{"ambient_bank", false});
 
     // main player
-    mCharacters.push_back(Character("player", glm::vec2(600.0f, 200.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
+    mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
     mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
 }
 

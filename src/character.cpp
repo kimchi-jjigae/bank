@@ -65,3 +65,13 @@ void Character::update()
         state->update();
     }
 }
+
+bool Character::topBehaviourFinished()
+{
+    return mBehaviouralStates.front()->mFinished;
+}
+
+void Character::popTopBehaviour()
+{
+    mBehaviouralStates.pop_front();
+}

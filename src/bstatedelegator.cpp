@@ -17,3 +17,14 @@ void BehaviouralStateDelegator::playerWalk(glm::vec2 destination)
     mCharacters.front().pushBehaviour(walkState);
     mCharacters.front().pushBehaviour(idleState);
 }
+
+void BehaviouralStateDelegator::update()
+{
+    for(auto& iter : mCharacters)
+    {
+        if(iter.topBehaviourFinished())
+        {
+            iter.popTopBehaviour();
+        }
+    }
+}
