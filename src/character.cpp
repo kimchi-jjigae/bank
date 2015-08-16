@@ -2,8 +2,9 @@
 #include "behaviouralstate.hpp"
 #include <iostream>
 
-Character::Character(std::string characterType, glm::vec2 spritePos, bool interactive, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim) :
+Character::Character(std::string characterType, glm::vec2 spritePos, bool interactive, const fea::Texture& texture, glm::vec2 spriteSize, bool scaled) :
     mCharacterType(characterType),
+    mScaled(scaled),
     mInteractive(interactive)
 {
     (void)mInteractive;
@@ -11,7 +12,6 @@ Character::Character(std::string characterType, glm::vec2 spritePos, bool intera
     mSprite.setTexture(texture);
     mSprite.setSize(spriteSize);
     mSprite.setPosition(spritePos);
-    mSprite.setAnimation(anim);
     mSprite.setOrigin(glm::vec2(spriteSize.x / 2.0f, spriteSize.y));
 }
 

@@ -55,14 +55,12 @@ void MainState::setupGraphics()
     mWallPainting.setPosition({984.0f, 200.0f});
 
     mTicketMachineTexture = makeTexture(gTextures.at("ticket_machine"));
-    mTicketMachine.setTexture(mTicketMachineTexture);
 
     mBackgroundBack.setPosition({0.0f, 0.0f});
     mBackgroundFront.setPosition({0.0f, 0.0f});
     mPillar.setPosition({450.0f, 0.0f});
     mBin.setPosition({520.0f, 440.0f});
     mSofa.setPosition({847.0f, 340.0f});
-    mTicketMachine.setPosition({400.0f, 345.0f});
     
     mPlayerTexture = makeTexture(gTextures.at("player"));
     mNumberTexture = makeTexture(gTextures.at("number_texture"));
@@ -234,11 +232,14 @@ void MainState::render()
         for(auto& iter : mCharacters)
         {
             auto& sprite = iter.getSprite();
-
             float yPos = sprite.getPosition().y;
-            float scale = ((yPos - 430.0f) / 336.0f)/2.0f + 0.5f;
 
-            sprite.setScale({scale, scale});
+            if(iter.mScaled)
+            {
+                float scale = ((yPos - 430.0f) / 336.0f)/2.0f + 0.5f;
+
+                sprite.setScale({scale, scale});
+            }
 
             if(yPos > 546.0f)
                 mBeforePillar.emplace(yPos, sprite);
@@ -252,7 +253,6 @@ void MainState::render()
         }
 
         mRenderer.queue(mPillar);
-        mRenderer.queue(mTicketMachine);
         mRenderer.queue(mBin);
         mRenderer.queue(mSofa);
 
@@ -283,10 +283,18 @@ void MainState::initialize()
     mBus.send(PlayMusicMessage{"ambient_bank", true});
 
     // main player
-    mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
+    mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
     mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
 
+
     mBus.send(StartMinigameMessage{"menu"});
+
+    // ticket machine
+    Character hej = Character("ticket_machine", glm::vec2(470.0f, 548.0f), true, mTicketMachineTexture, glm::vec2(113.0f, 96.0f), false);
+    glm::vec2 asdf = hej.getSprite().getSize();
+    hej.getSprite().setOrigin({asdf.x / 2.0f, asdf.y * 2.25f});
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
 }
 
 void MainState::updateNumbers()

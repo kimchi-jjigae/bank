@@ -9,7 +9,7 @@ class BehaviouralState;
 class Character
 {
     public:
-        Character(std::string characterType, glm::vec2 spritePos, bool interactive, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim);
+        Character(std::string characterType, glm::vec2 spritePos, bool interactive, const fea::Texture& texture, glm::vec2 spriteSize, bool scaled);
         const fea::AnimatedQuad& getSprite() const;
         fea::AnimatedQuad& getSprite();
         std::deque<std::shared_ptr<BehaviouralState>>& getBehaviouralStates();
@@ -21,6 +21,7 @@ class Character
         void pushBehaviour(std::shared_ptr<BehaviouralState> state);
         bool topBehaviourFinished();
         void popTopBehaviour();
+        bool mScaled;
 
     private:
         //glm::vec2 mClickablePosition;
