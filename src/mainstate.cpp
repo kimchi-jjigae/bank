@@ -34,6 +34,8 @@ void MainState::setupGraphics()
     mBackgroundFrontTexture = makeTexture(gTextures.at("bank_bg_f"));
     mBackgroundFront.setTexture(mBackgroundFrontTexture);
 
+    mBackgroundMask = makeTexture(gTextures.at("bank_mask"), false, true);
+
     mPillarTexture = makeTexture(gTextures.at("pillar"));
     mPillar.setTexture(mPillarTexture);
 
@@ -174,7 +176,11 @@ void MainState::handleMessage(const MouseClickMessage& message)
             // do nothing
         // else
             // walk to spot
-            mBStateDelegator.playerWalk(message.position);
+        if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
+        {
+            if(mBackgroundMask.getPixel(message.position.x, message.position.y) == fea::Color::Black)
+                mBStateDelegator.playerWalk(message.position);
+        }
     }
 }
 
