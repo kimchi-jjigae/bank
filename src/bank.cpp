@@ -28,6 +28,7 @@ void Bank::setup(const std::vector<std::string>& args)
 {
     (void)args;
     mWindow.create(fea::VideoMode(1024, 768), "Bank");
+    mWindow.setVSyncEnabled(true);
     mMainState.setupGraphics();
     mRenderer.setup();
     mWindow.setFramerateLimit(60);

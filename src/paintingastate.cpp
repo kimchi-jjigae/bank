@@ -57,7 +57,10 @@ void PaintingAState::handleMouseMove(const glm::uvec2& position)
     float newRotation = mPainting.getRotation();
 
     if(newRotation > 1.8f || newRotation < -2.4f)
+    {
         mDied = true;
+        gPaintingRuined = true;
+    }
 }
 
 void PaintingAState::handleMouseClick(const glm::uvec2& position)

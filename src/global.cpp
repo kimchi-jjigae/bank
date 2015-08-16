@@ -2,6 +2,7 @@
 
 std::unordered_map<std::string, std::string> gTextures = {};
 std::unordered_map<std::string, std::unordered_map<std::string, fea::Animation>> gAnimations = {};
+bool gPaintingRuined = false;
 
 void setupGlobals()
 {
@@ -29,6 +30,9 @@ void setupGlobals()
         {"painting", "data/sprites/tavla.png"},
         {"bin", "data/sprites/bin.png"},
         {"sofa", "data/sprites/sofa.png"},
+        {"wallpainting", "data/sprites/wallpainting.png"},
+        {"menubg", "data/sprites/menubg.png"},
+        {"menubutton", "data/sprites/menubutton.png"},
     };
 
     gAnimations = 

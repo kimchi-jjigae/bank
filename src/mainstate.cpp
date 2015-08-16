@@ -4,6 +4,7 @@
 #include "texturemaker.hpp"
 #include "global.hpp"
 #include "minigames.hpp"
+#include "randomwait.hpp"
 #include <map>
 
 MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
@@ -12,7 +13,8 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBStateDelegator(bus, mCharacters),
     mInitialized(false),
     mQueueCounter(28),
-    mPlayerQueueNumber(38),
+    mPlayerQueueNumber(33),
+    mFramesToNextNumber(randomWaitTime()),
     //rendering
     mBackgroundBack({1024.0f, 768.0f}),
     mBackgroundFront({1024.0f, 768.0f}),
@@ -20,6 +22,7 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
     mBin({84.0f, 116.0f}),
     mSofa({177.0f, 294.0f}),
     mTicketMachine({113.0f, 96.0f}),
+    mWallPainting({40.0f, 116.0f}),
     mFirstNumber({26.0f, 40.0f}),
     mSecondNumber({26.0f, 40.0f})
 {
@@ -46,6 +49,10 @@ void MainState::setupGraphics()
 
     mSofaTexture = makeTexture(gTextures.at("sofa"));
     mSofa.setTexture(mSofaTexture);
+
+    mWallPaintingTexture = makeTexture(gTextures.at("wallpainting"));
+    mWallPainting.setTexture(mWallPaintingTexture);
+    mWallPainting.setPosition({984.0f, 200.0f});
 
     mTicketMachineTexture = makeTexture(gTextures.at("ticket_machine"));
 
@@ -95,8 +102,12 @@ void MainState::update()
 
     if(!mCurrentActivityState)
     {
-        if(rand() % 1000 == 0)
+        mFramesToNextNumber--;
+        if(mFramesToNextNumber == 0)
+        {
             mBus.send(AdvanceQueueMessage());
+            mFramesToNextNumber = randomWaitTime();
+        }
     }
 }
 
@@ -147,6 +158,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
         mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
     else if(name == "painting")
         mCurrentActivityState = std::unique_ptr<PaintingAState>(new PaintingAState(mBus, mRenderer));
+    else if(name == "menu")
+        mCurrentActivityState = std::unique_ptr<MenuAState>(new MenuAState(mBus, mRenderer));
 }
 
 void MainState::handleMessage(const MouseMoveMessage& message)
@@ -248,6 +261,9 @@ void MainState::render()
         mRenderer.queue(mBin);
         mRenderer.queue(mSofa);
 
+        if(!gPaintingRuined)
+            mRenderer.queue(mWallPainting);
+
         for(auto& sprite : mBeforePillar)
         {
             mRenderer.queue(sprite.second);
@@ -269,11 +285,14 @@ void MainState::initialize()
 {
     mInitialized = true;
 
-    mBus.send(PlayMusicMessage{"ambient_bank", false});
+    mBus.send(PlayMusicMessage{"ambient_bank", true});
 
     // main player
     mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
     mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
+
+
+    mBus.send(StartMinigameMessage{"menu"});
 
     // ticket machine
     Character hej = Character("ticket_machine", glm::vec2(470.0f, 548.0f), true, mTicketMachineTexture, glm::vec2(113.0f, 96.0f), false);

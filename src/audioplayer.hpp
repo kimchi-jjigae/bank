@@ -21,4 +21,5 @@ class AudioPlayer :
         fea::AudioHandle mAudioHandle;
         std::unordered_map<std::string, std::string> mAudioFiles;
         BufferCache mBufferCache;
+        bool mLoopMusic;
 };
