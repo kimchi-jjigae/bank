@@ -37,7 +37,7 @@ ViewNoteAState::ViewNoteAState(fea::MessageBus& bus, fea::Renderer2D& renderer) 
     mSecondNumber.setTexture(mNoteNumberTexture);
 
     std::string currentNumber;
-    if(gQueueCounter < 10)
+    if(gPlayerQueueNumber < 10)
         currentNumber = "0";
 
     currentNumber.append(std::to_string(gPlayerQueueNumber));
