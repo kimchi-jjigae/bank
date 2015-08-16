@@ -19,6 +19,7 @@ class Character
         std::string mCharacterType;
         void clearBehaviours();
         void pushBehaviour(std::shared_ptr<BehaviouralState> state);
+        bool topBehaviourFinished();
 
     private:
         //glm::vec2 mClickablePosition;

@@ -14,6 +14,7 @@ class BehaviouralState
         void setOwner(Character* character);
         bool mSwitchedTo;
         virtual void switchTo() = 0;
+        bool mFinished;
 
     protected:
         fea::MessageBus& mBus;

@@ -46,9 +46,18 @@ void WalkingBState::update()
 
     glm::vec2 nextPos = charPos + mVelocity;
     mCharacter->setPosition(nextPos);
+
+    if(distance(nextPos, mPositionDestination) < 2.1f)
+    {
+        mFinished = true;
+    }
+
+    if(mFinished)
+    {
+        onFinish();
+    }
 }
 
 void WalkingBState::onFinish()
 {
-    //
 }
