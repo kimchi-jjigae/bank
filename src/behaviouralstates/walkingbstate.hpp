@@ -5,9 +5,9 @@ class WalkingBState : public BehaviouralState
 {
     public:
         WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float speed);
-        void switchTo();
-        void update();
-        void onFinish();
+        void switchTo() override;
+        void update() override;
+        void onFinish() override;
         std::string getAnimationType();
 
     private:

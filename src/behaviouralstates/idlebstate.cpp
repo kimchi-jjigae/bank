@@ -1,4 +1,5 @@
 #include "idlebstate.hpp"
+#include "../global.hpp"
 
 IdleBState::IdleBState(fea::MessageBus& bus) :
     BehaviouralState(bus)
@@ -10,14 +11,13 @@ IdleBState::IdleBState(fea::MessageBus& bus) :
 
 void IdleBState::switchTo()
 {
-    anim = getAnimation("player", mAnimationType);
-    mCharacter->getSprite.setAnimation(anim);
+    const fea::Animation& anim = getAnimation("player", mAnimationType);
+    mCharacter->getSpriteRef().setAnimation(anim);
     mSwitchedTo = true;
 }
 
 void IdleBState::update()
 {
-    // nothing happens, I guess
 }
 
 void IdleBState::onFinish()

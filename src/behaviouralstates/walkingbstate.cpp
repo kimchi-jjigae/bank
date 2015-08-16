@@ -1,4 +1,5 @@
 #include "walkingbstate.hpp"
+#include "../global.hpp"
 
 WalkingBState::WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float speed) :
     BehaviouralState(bus),
@@ -11,14 +12,13 @@ WalkingBState::WalkingBState(fea::MessageBus& bus, glm::vec2 targetPos, float sp
 
 void WalkingBState::switchTo()
 {
-    anim = getAnimation("player", mAnimationType);
-    mCharacter->getSprite.setAnimation(anim);
+    const fea::Animation& anim = getAnimation("player", mAnimationType);
+    mCharacter->getSpriteRef().setAnimation(anim);
     mSwitchedTo = true;
 }
 
 void WalkingBState::update()
 {
-    // work out velocity first
     glm::vec2 charPos = mCharacter->getPosition();
     glm::vec2 vel = mPositionDestination - charPos;
     vel = glm::normalize(vel);

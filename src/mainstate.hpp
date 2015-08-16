@@ -32,7 +32,7 @@ class MainState :
         fea::MessageBus& mBus;
         fea::Renderer2D& mRenderer;
 
-        std::vector<Character> mCharacters;
+        std::list<Character> mCharacters;
         std::unique_ptr<ActivityState> mCurrentActivityState;
 
         BehaviouralStateDelegator mBStateDelegator;

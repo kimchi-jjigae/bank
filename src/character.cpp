@@ -2,7 +2,7 @@
 #include "behaviouralstate.hpp"
 #include <iostream>
 
-Character::Character(glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, fea::Animation anim) :
+Character::Character(std::string characterType, glm::vec2 spritePos, bool interactive, std::shared_ptr<BehaviouralState> initialBehaviour, const fea::Texture& texture, glm::vec2 spriteSize, const fea::Animation& anim) :
     mCharacterType(characterType),
     mSpritePosition(spritePos),
     mInteractive(interactive)
@@ -21,9 +21,24 @@ const fea::AnimatedQuad& Character::getSprite()
     return mSprite;
 }
 
+fea::AnimatedQuad& Character::getSpriteRef()
+{
+    return mSprite;
+}
+
 std::deque<std::shared_ptr<BehaviouralState>>& Character::getBehaviouralStates()
 {
     return mBehaviouralStates;
+}
+
+void Character::clearBehaviours()
+{
+    mBehaviouralStates.clear();
+}
+
+void Character::pushBehaviour(std::shared_ptr<BehaviouralState> state)
+{
+    mBehaviouralStates.push_back(state);
 }
 
 glm::vec2 Character::getPosition()
@@ -40,10 +55,14 @@ void Character::setPosition(glm::vec2 pos)
 void Character::update()
 {
     mSprite.tick();
-    std::shared_ptr<BehaviouralState> state = mBehaviouralStates.front();
-    if(!state->mSwitchedTo)
+    if(!mBehaviouralStates.empty())
     {
-        state->switchTo();
+        std::shared_ptr<BehaviouralState> state = mBehaviouralStates.front();
+        if(!state->mSwitchedTo)
+        {
+            state->setOwner(this);
+            state->switchTo();
+        }
+        state->update();
     }
-    state->update();
 }

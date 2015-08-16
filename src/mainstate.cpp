@@ -140,7 +140,7 @@ void MainState::handleMessage(const MouseClickMessage& message)
     else
     {
         /*
-        std::vector<Character> clickableChars;
+        std::list<Character> clickableChars;
         for(auto iter : mCharacters)
         {
         }
@@ -202,7 +202,7 @@ void MainState::initialize()
     mBus.send(PlayMusicMessage{"ambient_bank", false});
 
     // main player
-    mCharacters.push_back(Character(glm::vec2(600.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
+    mCharacters.push_back(Character("player", glm::vec2(600.0f, 200.0f), false, std::make_shared<IdleBState>(mBus), mPlayerTexture, glm::vec2(124.0f, 396.0f), getAnimation("player", "idle-front")));
 }
 
 void MainState::updateNumbers()

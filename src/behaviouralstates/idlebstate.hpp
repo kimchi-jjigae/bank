@@ -5,8 +5,8 @@ class IdleBState : public BehaviouralState
 {
     public:
         IdleBState(fea::MessageBus& bus);
-        void switchTo();
-        void update();
-        void onFinish();
+        void switchTo() override;
+        void update() override;
+        void onFinish() override;
         std::string getAnimationType();
 };
