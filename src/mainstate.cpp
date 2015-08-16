@@ -162,6 +162,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
             mCurrentActivityState = std::unique_ptr<ChildQuestionAState>(new ChildQuestionAState(mBus, mRenderer));
         else if(name == "heartattack")
             mCurrentActivityState = std::unique_ptr<HeartAttackAState>(new HeartAttackAState(mBus, mRenderer));
+        else if(name == "runerrand")
+            mCurrentActivityState = std::unique_ptr<RunErrandAState>(new RunErrandAState(mBus, mRenderer));
         else if(name == "whiteboard")
             mCurrentActivityState = std::unique_ptr<WhiteboardAState>(new WhiteboardAState(mBus, mRenderer));
         else if(name == "painting")
@@ -253,6 +255,8 @@ void MainState::handleMessage(const KeyPressedMessage& message)
             mBus.send(StartMinigameMessage{"childquestion"});
         else if(message.key == fea::Keyboard:: E)
             mBus.send(StartMinigameMessage{"heartattack"});
+        else if(message.key == fea::Keyboard:: R)
+            mBus.send(StartMinigameMessage{"runerrand"});
         else if(message.key == fea::Keyboard:: W)
             mBus.send(StartMinigameMessage{"whiteboard"});
         else if(message.key == fea::Keyboard:: P)

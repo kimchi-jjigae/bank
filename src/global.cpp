@@ -56,6 +56,9 @@ void setupGlobals()
         {"broken1", "data/sprites/broken1.png"},
         {"broken2", "data/sprites/broken2.png"},
         {"notenumbers", "data/sprites/notenumbers.png"},
+        {"nocashier", "data/sprites/nocashier.png"},
+        {"cashier", "data/sprites/cashier.png"},
+        {"cheque_table", "data/sprites/cheque_table.png"},
     };
 
     gAnimations = 

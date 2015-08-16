@@ -11,3 +11,4 @@
 #include "takenoteastate.hpp"
 #include "chequeastate.hpp"
 #include "viewnoteastate.hpp"
+#include "runerrandastate.hpp"
