@@ -24,6 +24,7 @@ void BehaviouralStateDelegator::update()
     {
         if(iter.topBehaviourFinished())
         {
+            iter.popTopBehaviour();
         }
     }
 }

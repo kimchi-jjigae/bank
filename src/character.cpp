@@ -70,3 +70,8 @@ bool Character::topBehaviourFinished()
 {
     return mBehaviouralStates.front()->mFinished;
 }
+
+void Character::popTopBehaviour()
+{
+    mBehaviouralStates.pop_front();
+}
