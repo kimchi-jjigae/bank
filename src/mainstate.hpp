@@ -45,11 +45,13 @@ class MainState :
         fea::Texture mBackgroundBackTexture;
         fea::Texture mBackgroundFrontTexture;
         fea::Texture mPillarTexture;
+        fea::Texture mTicketMachineTexture;
         fea::Texture mPlayerTexture;
         fea::Texture mNumberTexture;
         fea::Quad mBackgroundBack;
         fea::Quad mBackgroundFront;
         fea::Quad mPillar;
+        fea::Quad mTicketMachine;
         fea::AnimatedQuad mFirstNumber;
         fea::AnimatedQuad mSecondNumber;
 };
