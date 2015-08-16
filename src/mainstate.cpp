@@ -332,6 +332,7 @@ void MainState::initialize()
     mInitialized = true;
 
     gQueueCounter = 28;
+    updateNumbers();
 
     // main player
     mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));

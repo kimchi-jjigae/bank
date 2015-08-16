@@ -22,4 +22,7 @@ class ViewNoteAState : public ActivityState
         fea::Quad mNoteBroken1Quad;
         fea::Texture mNoteBroken2Texture;
         fea::Quad mNoteBroken2Quad;
+        fea::Texture mNoteNumberTexture;
+        fea::AnimatedQuad mFirstNumber;
+        fea::AnimatedQuad mSecondNumber;
 };

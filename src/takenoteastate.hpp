@@ -18,4 +18,7 @@ class TakeNoteAState : public ActivityState
         fea::Quad mBackButton;
         fea::Texture mNoteTexture;
         fea::Quad mNoteQuad;
+        fea::Texture mNoteNumberTexture;
+        fea::AnimatedQuad mFirstNumber;
+        fea::AnimatedQuad mSecondNumber;
 };
