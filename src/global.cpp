@@ -13,6 +13,7 @@ void setupGlobals()
         {"outside", "data/sprites/Outside.png"},
         {"bank_bg_b", "data/sprites/bg_back.png"},
         {"bank_bg_f", "data/sprites/bg_front.png"},
+        {"bank_mask", "data/sprites/mask.png"},
         {"crossword", "data/sprites/crossword.png"},
         {"say_button", "data/sprites/sayButton.png"},
         {"back_button", "data/sprites/backButton.png"},

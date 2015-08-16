@@ -44,6 +44,7 @@ class MainState :
         //graphics
         fea::Texture mBackgroundBackTexture;
         fea::Texture mBackgroundFrontTexture;
+        fea::Texture mBackgroundMask;
         fea::Texture mPillarTexture;
         fea::Texture mTicketMachineTexture;
         fea::Texture mPlayerTexture;
