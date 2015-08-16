@@ -54,6 +54,12 @@ void setupGlobals()
             },
         },
         {
+            "painting", 
+            {
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+            },
+        },
+        {
             "number", 
             {
                 {"0", fea::Animation(glm::vec2((0.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},

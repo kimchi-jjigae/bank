@@ -109,6 +109,17 @@ void MainState::update()
             mFramesToNextNumber = randomWaitTime();
         }
     }
+
+    if(!gPaintingRuined)
+    {
+        // delete painting character
+        /*
+        for(auto& iter : mCharacters)
+        {
+            //
+        }
+        */
+    }
 }
 
 void MainState::handleMessage(const AdvanceQueueMessage& message)
@@ -184,15 +195,12 @@ void MainState::handleMessage(const MouseClickMessage& message)
     {
         std::map<float, Character> clickableChars;
 
-        std::cout << "clicked\n";
         for(auto& iter : mCharacters)
         {
             auto& sprite = iter.getSprite();
             float yPos = sprite.getPosition().y;
-            std::cout << intersects(message.position, iter.getSprite()) << "\n";
             if(intersects(message.position, iter.getSprite()))
             {
-                std::cout << "intersect\n";
                 if(iter.mInteractive)
                 {
                     clickableChars.emplace(yPos, iter);
@@ -202,13 +210,16 @@ void MainState::handleMessage(const MouseClickMessage& message)
         if(!clickableChars.empty())
         {
             // grab the first one, do interactive stuff
-            std::cout << "stuff clicked on\n";
             Character car = clickableChars.rbegin()->second;
             std::string type = car.mCharacterType;
 
             if(type == "ticket_machine")
             {
-                mBStateDelegator.takeTicket({454.0f, 561.0f});
+                mBStateDelegator.gameBehaviour({454.0f, 561.0f}, "ticket_machine");
+            }
+            else if(type == "painting")
+            {
+                mBStateDelegator.gameBehaviour({906.0f, 496.0f}, "painting");
             }
         }
         else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
@@ -269,9 +280,6 @@ void MainState::render()
         mRenderer.queue(mBin);
         mRenderer.queue(mSofa);
 
-        if(!gPaintingRuined)
-            mRenderer.queue(mWallPainting);
-
         for(auto& sprite : mBeforePillar)
         {
             mRenderer.queue(sprite.second);
@@ -305,6 +313,13 @@ void MainState::initialize()
     // ticket machine
     Character hej = Character("ticket_machine", glm::vec2(470.0f, 548.0f), true, mTicketMachineTexture, glm::vec2(113.0f, 96.0f), false);
     glm::vec2 asdf = hej.getSprite().getSize();
+    hej.getSprite().setOrigin({asdf.x / 2.0f, asdf.y * 2.25f});
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // painting
+    hej = Character("painting", glm::vec2(1006.0f, 420.0f), true, mWallPaintingTexture, glm::vec2(40.0f, 116.0f), false);
+    asdf = hej.getSprite().getSize();
     hej.getSprite().setOrigin({asdf.x / 2.0f, asdf.y * 2.25f});
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
