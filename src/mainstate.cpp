@@ -199,7 +199,13 @@ void MainState::render()
 
         for(auto& iter : mCharacters)
         {
-            mRenderer.queue(iter.getSprite());
+            auto& sprite = iter.getSprite();
+
+            float yPos = sprite.getPosition().y;
+            float scale = ((yPos - 430.0f) / 336.0f)/2.0f + 0.5f;
+
+            sprite.setScale({scale, scale});
+            mRenderer.queue(sprite);
         }
         mRenderer.queue(mPillar);
         mRenderer.queue(mTicketMachine);

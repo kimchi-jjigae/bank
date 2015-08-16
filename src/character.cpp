@@ -15,12 +15,12 @@ Character::Character(std::string characterType, glm::vec2 spritePos, bool intera
     mSprite.setOrigin(glm::vec2(spriteSize.x / 2.0f, spriteSize.y));
 }
 
-const fea::AnimatedQuad& Character::getSprite()
+const fea::AnimatedQuad& Character::getSprite() const
 {
     return mSprite;
 }
 
-fea::AnimatedQuad& Character::getSpriteRef()
+fea::AnimatedQuad& Character::getSprite()
 {
     return mSprite;
 }
