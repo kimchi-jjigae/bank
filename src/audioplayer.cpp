@@ -45,5 +45,6 @@ void AudioPlayer::handleMessage(const PlaySoundMessage& message)
 
 void AudioPlayer::handleMessage(const StopSoundMessage& message)
 {
+    (void)message;
     mAudioPlayer.stop(mAudioHandle);
 }

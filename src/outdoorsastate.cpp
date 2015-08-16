@@ -16,7 +16,7 @@ OutdoorsAState::OutdoorsAState(fea::MessageBus& bus, fea::Renderer2D& renderer) 
     mBackButton.setTexture(mBackButtonTexture);
     mBackButton.setPosition({35.0f, 640.0f});
 
-    mBus.send(PlaySoundMessage{"sigh"});
+    mBus.send(PlaySoundMessage{"sigh", false});
 }
 
 void OutdoorsAState::update()
@@ -38,6 +38,7 @@ void OutdoorsAState::render()
 
 void OutdoorsAState::handleMouseMove(const glm::uvec2& position)
 {
+    (void)position;
 }
 
 void OutdoorsAState::handleMouseClick(const glm::uvec2& position)
@@ -50,4 +51,5 @@ void OutdoorsAState::handleMouseClick(const glm::uvec2& position)
 
 void OutdoorsAState::handleMouseRelease(const glm::uvec2& position)
 {
+    (void)position;
 }

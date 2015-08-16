@@ -28,6 +28,9 @@ The manual and changelog are in the header file "lodepng.hpp"
 Rename this file to lodepng.cpp to use it for C++, or to lodepng.c to use it for C.
 */
 
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wshadow"
+
 #include "lodepng.hpp"
 
 #include <stdio.h>

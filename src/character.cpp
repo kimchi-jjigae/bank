@@ -6,6 +6,8 @@ Character::Character(std::string characterType, glm::vec2 spritePos, bool intera
     mCharacterType(characterType),
     mInteractive(interactive)
 {
+    (void)mInteractive;
+
     mSprite.setTexture(texture);
     mSprite.setSize(spriteSize);
     mSprite.setPosition(spritePos);

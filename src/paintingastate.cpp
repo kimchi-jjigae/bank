@@ -81,5 +81,6 @@ void PaintingAState::handleMouseClick(const glm::uvec2& position)
 
 void PaintingAState::handleMouseRelease(const glm::uvec2& position)
 {
+    (void)position;
     mDragging = false;
 }

@@ -9,10 +9,10 @@ bool CrosswordAState::mCanvasInitialized = false;
 CrosswordAState::CrosswordAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
     ActivityState(bus, renderer),
     mCounter(600),
+    mBackButton({206.0f, 100.0f}),
     mBackground({1024.0f, 768.0f}),
     mCanvasQuad({764.0f, 684.0f}),
-    mDragging(false),
-    mBackButton({206.0f, 100.0f})
+    mDragging(false)
 {
     mBackgroundTexture = makeTexture(gTextures.at("crossword"));
     mBackground.setTexture(mBackgroundTexture);
@@ -30,7 +30,7 @@ CrosswordAState::CrosswordAState(fea::MessageBus& bus, fea::Renderer2D& renderer
     mCanvasQuad.setTexture(mCanvas);
     mCanvasQuad.setPosition({202.0f, 77.0f});
 
-    mBus.send(PlaySoundMessage{"turn_page"});
+    mBus.send(PlaySoundMessage{"turn_page", false});
 }
 
 void CrosswordAState::update()
@@ -101,6 +101,7 @@ void CrosswordAState::handleMouseClick(const glm::uvec2& position)
 
 void CrosswordAState::handleMouseRelease(const glm::uvec2& position)
 {
+    (void) position;
     mDragging = false;
     mBus.send(StopSoundMessage());
 }
@@ -109,12 +110,12 @@ void CrosswordAState::putDot(const glm::uvec2& position)
 {
     int32_t radius = 1;
 
-    for(int32_t x = position.x - radius; x < position.x + radius; x++)
+    for(int32_t x = (int32_t)position.x - (int32_t)radius; x < (int32_t)position.x + (int32_t)radius; x++)
     {
-        for(int32_t y = position.y - radius; y < position.y + radius; y++)
+        for(int32_t y = (int32_t)position.y - radius; y < (int32_t)position.y + radius; y++)
         {
             if(x > 0 && y > 0 && x < 764 && y < 684)
-                mCanvas.setPixel(x, y, fea::Color(0, 15, 85));
+                mCanvas.setPixel((uint32_t)x,(uint32_t) y, fea::Color(0, 15, 85));
         }
     }
 }

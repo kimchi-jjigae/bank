@@ -43,6 +43,7 @@ void ChildQuestionAState::render()
 
 void ChildQuestionAState::handleMouseMove(const glm::uvec2& position)
 {
+    (void)position;
 }
 
 void ChildQuestionAState::handleMouseClick(const glm::uvec2& position)
@@ -63,4 +64,5 @@ void ChildQuestionAState::handleMouseClick(const glm::uvec2& position)
 
 void ChildQuestionAState::handleMouseRelease(const glm::uvec2& position)
 {
+    (void)position;
 }

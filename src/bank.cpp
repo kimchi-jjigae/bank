@@ -20,11 +20,13 @@ Bank::~Bank()
 
 void Bank::handleMessage(const QuitMessage& message)
 {
+    (void)message;
     quit();
 }
 
 void Bank::setup(const std::vector<std::string>& args)
 {
+    (void)args;
     mWindow.create(fea::VideoMode(1024, 768), "Bank");
     mMainState.setupGraphics();
     mRenderer.setup();
