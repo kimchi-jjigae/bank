@@ -57,6 +57,7 @@ void MainState::setupGraphics()
     mCrosswordTexture = makeTexture(gTextures.at("crosswordt"));
     mSudokuTexture = makeTexture(gTextures.at("sudokut"));
     mCheckTexture = makeTexture(gTextures.at("checkt"));
+    mCashierTexture = makeTexture(gTextures.at("cashiert"));
 
     mBackgroundBack.setPosition({0.0f, 0.0f});
     mBackgroundFront.setPosition({0.0f, 0.0f});
@@ -256,6 +257,13 @@ void MainState::handleMessage(const MouseClickMessage& message)
             {
                 mBStateDelegator.gameBehaviour({583.0f, 485.0f}, "check");
             }
+            else if(type == "cashier")
+            {
+                if(gChequeDone && gPlayerQueueNumber == gQueueCounter)
+                {
+                }
+                mBStateDelegator.gameBehaviour({150.0f, 480.0f}, "cashier");
+            }
         }
         else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
         {
@@ -406,6 +414,11 @@ void MainState::initialize()
 
     // cheques
     hej = Character("check", glm::vec2(588.0f, 337.0f), true, mCheckTexture, glm::vec2(43.0f, 31.0f), false);
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // cashier
+    hej = Character("cashier", glm::vec2(152.0f, 339.0f), true, mCashierTexture, glm::vec2(119.0f, 93.0f), false);
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 }

@@ -53,6 +53,7 @@ class MainState :
         fea::Texture mCrosswordTexture;
         fea::Texture mSudokuTexture;
         fea::Texture mCheckTexture;
+        fea::Texture mCashierTexture;
         fea::Texture mPlayerTexture;
         fea::Texture mNumberTexture;
         fea::Texture mWallPaintingTexture;
