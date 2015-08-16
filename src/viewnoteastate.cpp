@@ -85,7 +85,10 @@ void ViewNoteAState::handleMouseClick(const glm::uvec2& position)
     {
         mIsFinished = true;
         if(gNoteBrokenState == 2)
+        {
             gNoteBrokenState = -1;
+            gBrokenNotes++;
+        }
     }
     else if(intersects(position, mNoteQuad))
     {

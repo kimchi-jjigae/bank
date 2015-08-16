@@ -8,6 +8,7 @@ bool gChequeDone = false;
 int32_t gPlayerQueueNumber = 0;
 int32_t gQueueCounter = 0;
 int32_t gNoteBrokenState = -1;
+int32_t gBrokenNotes = 0;
 
 void setupGlobals()
 {

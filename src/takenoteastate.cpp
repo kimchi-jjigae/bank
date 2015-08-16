@@ -22,7 +22,8 @@ TakeNoteAState::TakeNoteAState(fea::MessageBus& bus, fea::Renderer2D& renderer) 
     mNoteQuad.setTexture(mNoteTexture);
     mNoteQuad.setPosition({430.0f, 327.0f});
 
-    gPlayerQueueNumber = gQueueCounter + 5;
+    gPlayerQueueNumber = gQueueCounter + 5 + gBrokenNotes;
+
     gNoteBrokenState = 0;
 
     mNoteNumberTexture = makeTexture(gTextures.at("notenumbers"));
