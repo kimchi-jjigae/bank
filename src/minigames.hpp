@@ -8,3 +8,5 @@
 #include "paintingastate.hpp"
 #include "menuastate.hpp"
 #include "hangmanastate.hpp"
+#include "takenoteastate.hpp"
+#include "chequeastate.hpp"
