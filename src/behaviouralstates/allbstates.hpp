@@ -4,3 +4,5 @@
 #include "paintingbstate.hpp"
 #include "crosswordbstate.hpp"
 #include "sudokubstate.hpp"
+#include "checkbstate.hpp"
+#include "selfbstate.hpp"

@@ -41,8 +41,19 @@ void BehaviouralStateDelegator::gameBehaviour(glm::vec2 destination, std::string
     {
         gameState = std::make_shared<SudokuBState>(mBus);
     }
+    else if(game == "check")
+    {
+        gameState = std::make_shared<CheckBState>(mBus);
+    }
+    else if(game == "viewnote")
+    {
+        gameState = std::make_shared<SelfBState>(mBus);
+    }
 
-    mCharacters.front().pushBehaviour(walkState);
+    if(game != "viewnote")
+    {
+        mCharacters.front().pushBehaviour(walkState);
+    }
     mCharacters.front().pushBehaviour(gameState);
     mCharacters.front().pushBehaviour(idleState);
 }

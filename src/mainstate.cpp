@@ -56,6 +56,7 @@ void MainState::setupGraphics()
     mTicketMachineTexture = makeTexture(gTextures.at("ticket_machine"));
     mCrosswordTexture = makeTexture(gTextures.at("crosswordt"));
     mSudokuTexture = makeTexture(gTextures.at("sudokut"));
+    mCheckTexture = makeTexture(gTextures.at("checkt"));
 
     mBackgroundBack.setPosition({0.0f, 0.0f});
     mBackgroundFront.setPosition({0.0f, 0.0f});
@@ -198,7 +199,6 @@ void MainState::handleMessage(const MouseMoveMessage& message)
     }
     else
     {
-        //behav deleg?
     }
 }
 
@@ -230,6 +230,10 @@ void MainState::handleMessage(const MouseClickMessage& message)
             Character car = clickableChars.rbegin()->second;
             std::string type = car.mCharacterType;
 
+            if(type == "player")
+            {
+                mBStateDelegator.gameBehaviour({0.0f, 0.0f}, "viewnote");
+            }
             if(type == "ticket_machine")
             {
                 mBStateDelegator.gameBehaviour({454.0f, 561.0f}, "ticket_machine");
@@ -245,6 +249,10 @@ void MainState::handleMessage(const MouseClickMessage& message)
             else if(type == "sudoku")
             {
                 mBStateDelegator.gameBehaviour({714.0f, 658.0f}, "sudoku");
+            }
+            else if(type == "check")
+            {
+                mBStateDelegator.gameBehaviour({583.0f, 485.0f}, "check");
             }
         }
         else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
@@ -369,12 +377,11 @@ void MainState::initialize()
 
     gQueueCounter = 28;
 
-    // main player
-    mCharacters.push_back(Character("player", glm::vec2(600.0f, 500.0f), false, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
-    mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
-
-
     mBus.send(StartMinigameMessage{"menu"});
+
+    // main player
+    mCharacters.push_back(Character("player", glm::vec2(269.0f, 569.0f), true, mPlayerTexture, glm::vec2(124.0f, 396.0f), true));
+    mCharacters.front().pushBehaviour(std::make_shared<IdleBState>(mBus));
 
     // ticket machine
     Character hej = Character("ticket_machine", glm::vec2(470.0f, 548.0f), true, mTicketMachineTexture, glm::vec2(113.0f, 96.0f), false);
@@ -391,13 +398,16 @@ void MainState::initialize()
 
     // crossword
     hej = Character("crossword", glm::vec2(800.0f, 764.0f), true, mCrosswordTexture, glm::vec2(156.0f, 94.0f), false);
-    asdf = hej.getSprite().getSize();
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 
     // sudoku
     hej = Character("sudoku", glm::vec2(780.0f, 764.0f), true, mSudokuTexture, glm::vec2(156.0f, 94.0f), false);
-    asdf = hej.getSprite().getSize();
+    hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
+    mCharacters.push_back(hej);
+
+    // cheques
+    hej = Character("check", glm::vec2(588.0f, 337.0f), true, mCheckTexture, glm::vec2(43.0f, 31.0f), false);
     hej.pushBehaviour(std::make_shared<IdleBState>(mBus));
     mCharacters.push_back(hej);
 }

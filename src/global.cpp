@@ -16,6 +16,7 @@ void setupGlobals()
         {"crosswordt", "data/sprites/crossword_table.png"},
         {"sudoku", "data/sprites/sudoku.png"},
         {"sudokut", "data/sprites/sudoku_table.png"},
+        {"checkt", "data/sprites/check.png"},
         {"pillar", "data/sprites/pillar.png"},
         {"outside", "data/sprites/Outside.png"},
         {"bank_bg_b", "data/sprites/bg_back.png"},
@@ -93,6 +94,12 @@ void setupGlobals()
         },
         {
             "newspaper", 
+            {
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+            },
+        },
+        {
+            "check", 
             {
                 {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
             },
