@@ -12,6 +12,8 @@ AudioPlayer::AudioPlayer(fea::MessageBus& bus) :
         {"pen", "data/audio/Pen.ogg"},
         {"sigh", "data/audio/sigh.ogg"},
         {"punch", "data/audio/Punch.ogg"},
+        {"rip1", "data/audio/rip1.ogg"},
+        {"rip2", "data/audio/rip2.ogg"},
         //music
         {"ambient_bank", "data/music/Ambankient.ogg"}
     }),

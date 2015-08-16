@@ -10,6 +10,7 @@ extern bool gMenuOver;
 extern bool gChequeDone;
 extern int32_t gPlayerQueueNumber;
 extern int32_t gQueueCounter;
+extern int32_t gNoteBrokenState;
 
 void setupGlobals();
 const fea::Animation& getAnimation(const std::string& character, const std::string& animation);

@@ -10,3 +10,4 @@
 #include "hangmanastate.hpp"
 #include "takenoteastate.hpp"
 #include "chequeastate.hpp"
+#include "viewnoteastate.hpp"

@@ -20,9 +20,8 @@ TakeNoteAState::TakeNoteAState(fea::MessageBus& bus, fea::Renderer2D& renderer) 
     mNoteQuad.setTexture(mNoteTexture);
     mNoteQuad.setPosition({430.0f, 327.0f});
 
-    mBus.send(PlaySoundMessage{"sigh", false});
-
     gPlayerQueueNumber = gQueueCounter + 5;
+    gNoteBrokenState = 0;
 }
 
 void TakeNoteAState::update()

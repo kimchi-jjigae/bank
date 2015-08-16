@@ -7,6 +7,7 @@ bool gMenuOver = false;
 bool gChequeDone = false;
 int32_t gPlayerQueueNumber = 0;
 int32_t gQueueCounter = 0;
+int32_t gNoteBrokenState = -1;
 
 void setupGlobals()
 {
@@ -51,6 +52,8 @@ void setupGlobals()
         {"handnotebg", "data/sprites/openhandbg.png"},
         {"queuenote", "data/sprites/queuenote.png"},
         {"chequebg", "data/sprites/chequebg.png"},
+        {"broken1", "data/sprites/broken1.png"},
+        {"broken2", "data/sprites/broken2.png"},
     };
 
     gAnimations = 

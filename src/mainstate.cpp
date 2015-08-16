@@ -172,6 +172,8 @@ void MainState::handleMessage(const StartMinigameMessage& message)
             mCurrentActivityState = std::unique_ptr<HangmanAState>(new HangmanAState(mBus, mRenderer));
         else if(name == "takenote")
             mCurrentActivityState = std::unique_ptr<TakeNoteAState>(new TakeNoteAState(mBus, mRenderer));
+        else if(name == "viewnote")
+            mCurrentActivityState = std::unique_ptr<ViewNoteAState>(new ViewNoteAState(mBus, mRenderer));
         else if(name == "cheque")
             mCurrentActivityState = std::unique_ptr<ChequeAState>(new ChequeAState(mBus, mRenderer));
     }
@@ -259,6 +261,8 @@ void MainState::handleMessage(const KeyPressedMessage& message)
             mBus.send(StartMinigameMessage{"hangman"});
         else if(message.key == fea::Keyboard:: T)
             mBus.send(StartMinigameMessage{"takenote"});
+        else if(message.key == fea::Keyboard:: V)
+            mBus.send(StartMinigameMessage{"viewnote"});
         else if(message.key == fea::Keyboard:: Q)
             mBus.send(StartMinigameMessage{"cheque"});
         //behav deleg?
