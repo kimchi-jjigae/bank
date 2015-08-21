@@ -20,8 +20,8 @@ class Bank : public fea::Application,
         virtual void loop() override;
     private:
         fea::MessageBus mBus;
-        fea::Renderer2D mRenderer;
         fea::Window mWindow;
+        fea::Renderer2D mRenderer;
         fea::InputHandler mFeaInputHandler;
 
         InputHandler mInputHandler;

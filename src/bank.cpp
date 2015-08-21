@@ -3,8 +3,8 @@
 #include <fea/ui/sdl2inputbackend.hpp>
 
 Bank::Bank() :
+    mWindow(new fea::SDL2WindowBackend(), fea::VideoMode(1024, 768), "Bank"),
     mRenderer(fea::Viewport({1024, 768}, {0, 0}, fea::Camera({512.0f, 384.0f}))),
-    mWindow(new fea::SDL2WindowBackend()),
     mFeaInputHandler(new fea::SDL2InputBackend()),
     mInputHandler(mBus, mFeaInputHandler),
     mMainState(mBus, mRenderer),
@@ -27,10 +27,8 @@ void Bank::handleMessage(const QuitMessage& message)
 void Bank::setup(const std::vector<std::string>& args)
 {
     (void)args;
-    mWindow.create(fea::VideoMode(1024, 768), "Bank");
     mWindow.setVSyncEnabled(true);
     mMainState.setupGraphics();
-    mRenderer.setup();
     mWindow.setFramerateLimit(60);
 }
 

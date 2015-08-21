@@ -30,8 +30,6 @@ MainState::MainState(fea::MessageBus& bus, fea::Renderer2D& renderer):
 
 void MainState::setupGraphics()
 {
-    mRenderer.setup();
-
     mBackgroundBackTexture = makeTexture(gTextures.at("bank_bg_b"));
     mBackgroundBack.setTexture(mBackgroundBackTexture);
 
