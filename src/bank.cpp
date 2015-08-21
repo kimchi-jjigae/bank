@@ -11,6 +11,10 @@ Bank::Bank() :
     mAudioPlayer(mBus)
 {
     mBus.addSubscriber<QuitMessage>(*this);
+
+    mWindow.setVSyncEnabled(true);
+    mMainState.setupGraphics();
+    mWindow.setFramerateLimit(60);
 }
 
 Bank::~Bank()
@@ -22,19 +26,6 @@ void Bank::handleMessage(const QuitMessage& message)
 {
     (void)message;
     quit();
-}
-
-void Bank::setup(const std::vector<std::string>& args)
-{
-    (void)args;
-    mWindow.setVSyncEnabled(true);
-    mMainState.setupGraphics();
-    mWindow.setFramerateLimit(60);
-}
-
-void Bank::destroy()
-{
-    mWindow.close();
 }
 
 void Bank::loop()
