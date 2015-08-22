@@ -2,4 +2,4 @@
 #include "glm.hpp"
 #include <fea/render2d.hpp>
 
-bool intersects(const glm::uvec2& position, const fea::Quad& quad);
+bool intersects(const glm::ivec2& position, const fea::Quad& quad);
