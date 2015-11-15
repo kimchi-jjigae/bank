@@ -24,7 +24,7 @@ SudokuAState::SudokuAState(fea::MessageBus& bus, fea::Renderer2D& renderer) :
 
     if(!mCanvasInitialized)
     {
-        mCanvas.create(764, 684, fea::Color::Transparent, true, true);
+        mCanvas.create({764, 684}, fea::Color::Transparent, true, true);
         mCanvasInitialized = true;
     }
     
@@ -116,7 +116,7 @@ void SudokuAState::putDot(const glm::uvec2& position)
         for(int32_t y = (int32_t)position.y - radius; y < (int32_t)position.y + radius; y++)
         {
             if(x > 0 && y > 0 && x < 764 && y < 684)
-                mCanvas.setPixel((uint32_t)x, (uint32_t)y, fea::Color(0, 15, 85));
+                mCanvas.setPixel({(uint32_t)x, (uint32_t)y}, fea::Color(0, 15, 85));
         }
     }
 }

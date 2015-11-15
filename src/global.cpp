@@ -70,47 +70,47 @@ void setupGlobals()
         {
             "player", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, (0.0f * 172.0f)/860.0f), glm::vec2(53.0f/215.0f, 172.0f/860.0f), 4, 8)},
-                {"walking-front", fea::Animation(glm::vec2(0.0f, (1.0f * 172.0f)/860.0f), glm::vec2(53.0f/215.0f, 172.0f/860.0f), 4, 8)},
-                {"walking-left",  fea::Animation(glm::vec2(0.0f, (2.0f * 172.0f)/860.0f), glm::vec2(53.0f/215.0f, 172.0f/860.0f), 4, 8)},
-                {"walking-right", fea::Animation(glm::vec2(0.0f, (3.0f * 172.0f)/860.0f), glm::vec2(53.0f/215.0f, 172.0f/860.0f), 4, 8)},
-                {"idle-back",     fea::Animation(glm::vec2(0.0f, (4.0f * 172.0f)/860.0f), glm::vec2(53.0f/215.0f, 172.0f/860.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0, (0 * 396)), glm::vec2(124, 396), 4, 8)},
+                {"walking-front", fea::Animation(glm::vec2(0, (1 * 396)), glm::vec2(124, 396), 4, 8)},
+                {"walking-left",  fea::Animation(glm::vec2(0, (2 * 396)), glm::vec2(124, 396), 4, 8)},
+                {"walking-right", fea::Animation(glm::vec2(0, (3 * 396)), glm::vec2(124, 396), 4, 8)},
+                {"idle-back",     fea::Animation(glm::vec2(0, (4 * 396)), glm::vec2(124, 396), 1, 8)},
             },
         },
         {
             "ticket_machine", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(113, 96), 1, 8)},
             },
         },
         {
             "painting", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(40, 116), 1, 8)},
             },
         },
         {
             "crossword", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(156, 94), 1, 8)},
             },
         },
         {
             "sudoku", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(156, 94), 1, 8)},
             },
         },
-        {
-            "newspaper", 
-            {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
-            },
-        },
+        //{
+        //    "newspaper", 
+        //    {
+        //        {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(), 1, 8)},
+        //    },
+        //},
         {
             "check", 
             {
-                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 1, 8)},
+                {"idle-front",    fea::Animation(glm::vec2(0.0f, 0.0f), glm::vec2(43, 31), 1, 8)},
             },
         },
         {
@@ -128,31 +128,31 @@ void setupGlobals()
         {
             "number", 
             {
-                {"0", fea::Animation(glm::vec2((0.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"1", fea::Animation(glm::vec2((1.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"2", fea::Animation(glm::vec2((2.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"3", fea::Animation(glm::vec2((3.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"4", fea::Animation(glm::vec2((4.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"5", fea::Animation(glm::vec2((5.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"6", fea::Animation(glm::vec2((6.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"7", fea::Animation(glm::vec2((7.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"8", fea::Animation(glm::vec2((8.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)},
-                {"9", fea::Animation(glm::vec2((9.0f * 26.0f) / 260.0f, 0.0f), glm::vec2(26.0f / 260.0f, 1.0f), 1, 1)}
+                {"0", fea::Animation(glm::vec2((0.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"1", fea::Animation(glm::vec2((1.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"2", fea::Animation(glm::vec2((2.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"3", fea::Animation(glm::vec2((3.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"4", fea::Animation(glm::vec2((4.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"5", fea::Animation(glm::vec2((5.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"6", fea::Animation(glm::vec2((6.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"7", fea::Animation(glm::vec2((7.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"8", fea::Animation(glm::vec2((8.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)},
+                {"9", fea::Animation(glm::vec2((9.0f * 26.0f), 0), glm::vec2(26.0f, 42), 1, 1)}
             }
         },
         {
             "notenumber", 
             {
-                {"0", fea::Animation(glm::vec2((0.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"1", fea::Animation(glm::vec2((1.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"2", fea::Animation(glm::vec2((2.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"3", fea::Animation(glm::vec2((3.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"4", fea::Animation(glm::vec2((4.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"5", fea::Animation(glm::vec2((5.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"6", fea::Animation(glm::vec2((6.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"7", fea::Animation(glm::vec2((7.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"8", fea::Animation(glm::vec2((8.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)},
-                {"9", fea::Animation(glm::vec2((9.0f * 57.0f) / 570.0f, 0.0f), glm::vec2(57.0f / 570.0f, 1.0f), 1, 1)}
+                {"0", fea::Animation(glm::vec2((0.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"1", fea::Animation(glm::vec2((1.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"2", fea::Animation(glm::vec2((2.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"3", fea::Animation(glm::vec2((3.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"4", fea::Animation(glm::vec2((4.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"5", fea::Animation(glm::vec2((5.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"6", fea::Animation(glm::vec2((6.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"7", fea::Animation(glm::vec2((7.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"8", fea::Animation(glm::vec2((8.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)},
+                {"9", fea::Animation(glm::vec2((9.0f * 57.0f), 0.0f), glm::vec2(57, 57), 1, 1)}
             }
         }
    };

@@ -24,7 +24,7 @@ WhiteboardAState::WhiteboardAState(fea::MessageBus& bus, fea::Renderer2D& render
 
     if(!mCanvasInitialized)
     {
-        mCanvas.create(877, 613, fea::Color::Transparent, true, true);
+        mCanvas.create({877, 613}, fea::Color::Transparent, true, true);
         mCanvasInitialized = true;
     }
     
@@ -116,7 +116,7 @@ void WhiteboardAState::putDot(const glm::uvec2& position)
         for(int32_t y = (int32_t)position.y - radius; y < (int32_t)position.y + radius; y++)
         {
             if(x > 0 && y > 0 && x < 877 && y < 613)
-                mCanvas.setPixel((uint32_t)x, (uint32_t)y, fea::Color(241, 50, 0));
+                mCanvas.setPixel({(uint32_t)x, (uint32_t)y}, fea::Color(241, 50, 0));
         }
     }
 }

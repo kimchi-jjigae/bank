@@ -277,7 +277,7 @@ void MainState::handleMessage(const MouseClickMessage& message)
         }
         else if(message.position.x > 0 && message.position.x < 1024 && message.position.y > 0 && message.position.y < 768)
         {
-            if(mBackgroundMask.getPixel(message.position.x, message.position.y) == fea::Color::Black)
+            if(mBackgroundMask.getPixel({message.position.x, message.position.y}) == fea::Color::Black)
                 mBStateDelegator.playerWalk(message.position);
         }
     }
